@@ -1,16 +1,15 @@
 import hydra
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
+
+from dataloader.datasets import DataLoaderFactory
 
 
-@hydra.main(config_path="config", config_name="config")
+@hydra.main(config_path="config", config_name="config", version_base=None)
 def main(cfg: DictConfig):
-
-    clients_to_instantiate = []
-    for client_cfg in cfg.clients:
-        #print(client_cfg)
-        #print(client_cfg.client)
-        print(hydra.compose(config_name=f"client/{client_cfg.client}"))
-    print(clients_to_instantiate)
+    print(OmegaConf.to_yaml(cfg))
+    config = cfg
+    dataset = DataLoaderFactory.create_dataset(config)
+    data = dataset.load_partition(0)
 
 
 if __name__ == "__main__":
