@@ -1,4 +1,6 @@
 import argparse
+from flwr.client.mod import fixedclipping_mod
+from flwr.client.mod.localdp_mod import LocalDpMod
 from collections import OrderedDict
 from typing import Dict, Tuple, List
 
@@ -42,9 +44,16 @@ centralized_testset = mnist_fds.load_split("test")
 
 from flwr.server import ServerAppComponents
 
+# Create an instance of the mod with the required params
+local_dp_obj = LocalDpMod(
+    0.1, 0.1, 0.1, 0.3
+)
 # ClientApp for Flower-Next
 client = fl.client.ClientApp(
     client_fn=FlowerClient.get_client_fn(mnist_fds),
+    mods=[
+        local_dp_obj,
+    ]
 )
 
 # ServerApp for Flower-Next

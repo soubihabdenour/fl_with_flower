@@ -3,6 +3,7 @@ from collections import OrderedDict
 from typing import Dict, Tuple, List
 
 import torch
+from flwr.server.strategy import DifferentialPrivacyClientSideFixedClipping, DifferentialPrivacyServerSideFixedClipping
 from torch.utils.data import DataLoader
 
 import flwr as fl
@@ -82,6 +83,7 @@ strategy = fl.server.strategy.FedAvg(
     evaluate_metrics_aggregation_fn=weighted_average,  # Aggregate federated metrics
     evaluate_fn=get_evaluate_fn(centralized_testset),  # Global evaluation function
 )
+dp_strategy = DifferentialPrivacyServerSideFixedClipping(strategy, 0.1, 1, 100)
 def server_fn(context):
     # Configure the strategy
     strategy = fl.server.strategy.FedAvg(
