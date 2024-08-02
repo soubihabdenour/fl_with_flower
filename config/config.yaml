@@ -1,5 +1,21 @@
+defaults:
+  - dataset: pneumonia
+  - partitioning: iid
+  - clients: default
+  - server: default
+
+experiment:
+  name: "Federated Learning Experiment"
+  description: "An experiment with various configurations."
+
 clients:
-  - client: client1
-    count: 20
-  - client: client2
-    count: 30
+  client_number: 10
+  default_clients:
+    - type: default
+      count: 5
+
+
+server:
+  type: "default"
+  parameters:
+    rounds: 10
