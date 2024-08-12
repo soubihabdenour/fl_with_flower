@@ -1,17 +1,32 @@
+from datasets.utils.logging import disable_progress_bar
+from flwr.common.typing import Scalar
 
-"""pytorchexample: A Flower / PyTorch app."""
-
-from typing import List, Tuple
-
-from flwr.common import Context, Metrics, ndarrays_to_parameters
-from flwr.server import ServerApp, ServerAppComponents, ServerConfig
-from flwr.server.strategy import FedAvg
-
-from pytorchexample.task import Net, get_weights
+from torch.utils.data import DataLoader
 
 
-# Define metric aggregation function
+from fedavg.utils import train, test, apply_transforms, Net
+
+from collections import OrderedDict
+from typing import List, Tuple, Dict
+import flwr as fl
+from datasets import Dataset
+from flwr.common import Metrics
+
+from pyarrow import Scalar
+import torch
+
+
+def fit_config(server_round: int) -> Dict[str, Scalar]:
+    """Return a configuration with static batch size and (local) epochs."""
+    config = {
+        "epochs": 1,  # Number of local epochs done by clients
+        "batch_size": 32,  # Batch size to use by clients during fit()
+    }
+    return config
+
 def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
+    """Aggregation function for (federated) evaluation metrics, i.e. those returned by
+    the client's evaluate() method."""
     # Multiply accuracy of each client by number of examples used
     accuracies = [num_examples * m["accuracy"] for num_examples, m in metrics]
     examples = [num_examples for num_examples, _ in metrics]
@@ -19,29 +34,39 @@ def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
     # Aggregate and return custom metric (weighted average)
     return {"accuracy": sum(accuracies) / sum(examples)}
 
+def get_evaluate_fn(centralized_testset: Dataset):
+    """Return an evaluation function for centralized evaluation."""
 
-def server_fn(context: Context):
-    """Construct components that set the ServerApp behaviour."""
+    def evaluate(
+        server_round: int, parameters: fl.common.NDArrays, config: Dict[str, Scalar]
+    ):
+        """Use the entire CIFAR-10 test set for evaluation."""
 
-    # Read from config
-    num_rounds = context.run_config["num-server-rounds"]
+        # Determine device
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    # Initialize model parameters
-    ndarrays = get_weights(Net())
-    parameters = ndarrays_to_parameters(ndarrays)
+        model = Net()
+        #model = models.MobileNetV2(num_classes=2)
+        #model.classifier[-1] = nn.Linear(in_features=4096, out_features=2)
 
-    # Define the strategy
-    strategy = FedAvg(
-        fraction_fit=1.0,
-        fraction_evaluate=context.run_config["fraction-evaluate"],
-        min_available_clients=2,
-        evaluate_metrics_aggregation_fn=weighted_average,
-        initial_parameters=parameters,
-    )
-    config = ServerConfig(num_rounds=num_rounds)
+        set_params(model, parameters)
+        model.to(device)
 
-    return ServerAppComponents(strategy=strategy, config=config)
+        # Apply transform to dataset
+        testset = centralized_testset.with_transform(apply_transforms)
 
+        # Disable tqdm for dataset preprocessing
+        disable_progress_bar()
 
-# Create ServerApp
-app = ServerApp(server_fn=server_fn)
+        testloader = DataLoader(testset, batch_size=50)
+        loss, accuracy = test(model, testloader, device=device)
+
+        return loss, {"accuracy": accuracy}
+
+    return evaluate
+
+def set_params(model: torch.nn.ModuleList, params: List[fl.common.NDArrays]):
+    """Set model weights from a list of NumPy ndarrays."""
+    params_dict = zip(model.state_dict().keys(), params)
+    state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
+    model.load_state_dict(state_dict, strict=True)
