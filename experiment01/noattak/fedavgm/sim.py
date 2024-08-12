@@ -1,24 +1,14 @@
 import argparse
-from flwr.client.mod import fixedclipping_mod
 from flwr.client.mod.localdp_mod import LocalDpMod
-from collections import OrderedDict
-from typing import Dict, Tuple, List
-
 import torch
-from torch.utils.data import DataLoader
 
 import flwr as fl
-from flwr.common import Metrics
-from flwr.common.typing import Scalar
-
-from datasets import Dataset
 from datasets.utils.logging import disable_progress_bar
 from flwr_datasets import FederatedDataset
 import numpy as np
 import plot
 from clients import FlowerClient
 from servers import server_fn, strategy
-from utils import Net, test, apply_transforms
 import random
 
 seed = 0
@@ -41,7 +31,7 @@ parser.add_argument(
 )
 
 NUM_CLIENTS = 100
-NUM_ROUNDS = 1000
+NUM_ROUNDS = 10
 
 # Download MNIST dataset and partition it
 mnist_fds = FederatedDataset(dataset="MadElf1337/Pneumonia_Images", partitioners={"train": NUM_CLIENTS}, seed=seed)
@@ -83,7 +73,7 @@ def main():
         num_clients=NUM_CLIENTS,
         client_resources=client_resources,
         config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
-        strategy=strategy("FedAvg"),
+        strategy=strategy("FedAvgM", proximal_mu=0.1),
         actor_kwargs={
             "on_actor_init_fn": disable_progress_bar  # disable tqdm on each actor/process spawning virtual clients
         },

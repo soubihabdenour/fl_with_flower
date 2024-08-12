@@ -12,9 +12,6 @@ from flwr.common.typing import Scalar
 
 from datasets import Dataset
 from datasets.utils.logging import disable_progress_bar
-from flwr_datasets import FederatedDataset
-
-from clients import FlowerClient
 from data.dataloaders.pneumonia import centralized_testset
 from utils import Net, train, test, apply_transforms
 
@@ -31,7 +28,7 @@ def set_params(model: torch.nn.ModuleList, params: List[fl.common.NDArrays]):
 def fit_config(server_round: int) -> Dict[str, Scalar]:
     """Return a configuration with static batch size and (local) epochs."""
     config = {
-        "epochs": 1,  # Number of local epochs done by clients
+        "epochs": 3,  # Number of local epochs done by clients
         "batch_size": 32,  # Batch size to use by clients during fit()
     }
     return config
@@ -72,17 +69,43 @@ def get_evaluate_fn(
         testloader = DataLoader(testset, batch_size=50)
         loss, accuracy = test(model, testloader, device=device)
 
-        return loss, {"accuracy": accuracy}
+        return loss, {"accuracy": accuracy, "loss": loss}
 
     return evaluate
-strategy = fl.server.strategy.FedAvg(
-    fraction_fit=0.1,  # Sample 10% of available clients for training
-    fraction_evaluate=0.05,  # Sample 5% of available clients for evaluation
-    min_available_clients=10,
-    on_fit_config_fn=fit_config,
-    evaluate_metrics_aggregation_fn=weighted_average,  # Aggregate federated metrics
-    evaluate_fn=get_evaluate_fn(centralized_testset),  # Global evaluation function
-)
+
+def strategy(strategy, **kwargs):
+    if strategy == "FedAvg":
+        strat = fl.server.strategy.FedAvg(
+            fraction_fit=0.1,  # Sample 10% of available clients for training
+            fraction_evaluate=0.05,  # Sample 5% of available clients for evaluation
+            min_available_clients=10,
+            on_fit_config_fn=fit_config,
+            evaluate_metrics_aggregation_fn=weighted_average,  # Aggregate federated metrics
+            evaluate_fn=get_evaluate_fn(centralized_testset),  # Global evaluation function
+        )
+    elif strategy == "FedAvgM":
+        strat = fl.server.strategy.FedProx(
+            proximal_mu=kwargs.get("proximal_mu", 1),
+            fraction_fit=0.1,  # Sample 10% of available clients for training
+            fraction_evaluate=0.05,  # Sample 5% of available clients for evaluation
+            min_available_clients=10,
+            on_fit_config_fn=fit_config,
+            evaluate_metrics_aggregation_fn=weighted_average,  # Aggregate federated metrics
+            evaluate_fn=get_evaluate_fn(centralized_testset),  # Global evaluation function
+        )
+    elif strategy == "FedProx":
+        strat = fl.server.strategy.FedProx(
+            proximal_mu=kwargs.get("proximal_mu", 1),
+            fraction_fit=0.1,  # Sample 10% of available clients for training
+            fraction_evaluate=0.05,  # Sample 5% of available clients for evaluation
+            min_available_clients=10,
+            on_fit_config_fn=fit_config,
+            evaluate_metrics_aggregation_fn=weighted_average,  # Aggregate federated metrics
+            evaluate_fn=get_evaluate_fn(centralized_testset),  # Global evaluation function
+        )
+
+    return strat
+
 dp_strategy = DifferentialPrivacyServerSideFixedClipping(strategy, 0.1, 1, 100)
 def server_fn(context):
     # Configure the strategy

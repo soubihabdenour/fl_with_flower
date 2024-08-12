@@ -2,12 +2,15 @@ from collections import OrderedDict
 from typing import List
 import torch
 from flwr_datasets import FederatedDataset
+from torch import nn
 
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import flwr as fl
 
 from utils import Net, test, train, apply_transforms
+
+from torchvision import models
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -16,13 +19,16 @@ class FlowerClient(fl.client.NumPyClient):
     def __init__(self, trainset, valset):
         self.trainset = trainset
         self.valset = valset
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
 
         # Instantiate model
-        self.model = Net()
+        #self.model = Net()
+        self.model = models.vgg16(pretrained=True).to(self.device)
+        self.model.classifier[-1] = nn.Linear(in_features=4096, out_features=2)
 
         # Determine device
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        self.model.to(self.device)  # send model to device
+        #self.model.to(self.device)  # send model to device
 
     def get_parameters(self, config):
         return [val.cpu().numpy() for _, val in self.model.state_dict().items()]
@@ -43,7 +49,7 @@ class FlowerClient(fl.client.NumPyClient):
         trainloader = DataLoader(self.trainset, batch_size=batch, shuffle=True)
 
         # Define optimizer
-        optimizer = torch.optim.SGD(self.model.parameters(), lr=0.01, momentum=0.9)
+        optimizer = torch.optim.SGD(self.model.parameters(), lr=0.001, momentum=0.9)
         # Train
         train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
 
