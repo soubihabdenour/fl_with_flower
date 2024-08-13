@@ -18,10 +18,10 @@ def main(cfg: DictConfig):
         "num_cpus": cfg.client_resources.num_cpus,
         "num_gpus": cfg.client_resources.num_gpus,
     }
-    fds, centralized_testset = get_data(partitions_number=cfg.num_clients, config= cfg.dataset)
+    fds, centralized_testset = get_data(partitions_number=cfg.num_clients, config=cfg.dataset)
     # Start simulation
     history = fl.simulation.start_simulation(
-        client_fn=get_client_fn(fds),
+        client_fn=get_client_fn(fds, num_classes=cfg.num_classes),
         num_clients=cfg.num_clients,
         client_resources=client_resources,
         config=fl.server.ServerConfig(num_rounds=cfg.num_rounds),

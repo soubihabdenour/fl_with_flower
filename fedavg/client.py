@@ -1,25 +1,23 @@
 """pytorchexample: A Flower / PyTorch app."""
 
 from collections import OrderedDict
-from typing import Dict, List, Tuple
-
+from typing import List
 import flwr as fl
 import torch
 from flwr_datasets import FederatedDataset
 from torch.utils.data import DataLoader
-from torchvision import models
 
 from fedavg.utils import train, test, apply_transforms, Net
 
 
 # Define Flower Client
 class FlowerClient(fl.client.NumPyClient):
-    def __init__(self, trainset, valset):
+    def __init__(self, trainset, valset, num_classes):
         self.trainset = trainset
         self.valset = valset
 
         # Instantiate model
-        self.model = Net()
+        self.model = Net(num_classes=num_classes)
         #print(self.model.classifier[-1])
         #exit(0)
         #self.model = models.MobileNetV2(num_classes=2)
@@ -60,6 +58,8 @@ class FlowerClient(fl.client.NumPyClient):
 
         # Return statistics
         return float(loss), len(valloader.dataset), {"accuracy": float(accuracy)}
+
+
 def set_params(model: torch.nn.ModuleList, params: List[fl.common.NDArrays]):
     """Set model weights from a list of NumPy ndarrays."""
     params_dict = zip(model.state_dict().keys(), params)
@@ -67,7 +67,7 @@ def set_params(model: torch.nn.ModuleList, params: List[fl.common.NDArrays]):
     model.load_state_dict(state_dict, strict=True)
 
 
-def get_client_fn(dataset: FederatedDataset):
+def get_client_fn(dataset: FederatedDataset, num_classes):
     """Return a function to construct a client.
 
     The VirtualClientEngine will execute this function whenever a client is sampled by
@@ -93,26 +93,6 @@ def get_client_fn(dataset: FederatedDataset):
         valset = valset.with_transform(apply_transforms)
 
         # Create and return client
-        return FlowerClient(trainset, valset).to_client()
+        return FlowerClient(trainset, valset, num_classes).to_client()
 
     return client_fn
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

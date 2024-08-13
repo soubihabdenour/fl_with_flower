@@ -4,7 +4,7 @@ num_clients: 20
 num_rounds: 10
 client_resources:
   num_cpus: 2
-  num_gpus: 0.2
+  num_gpus: 0.2  # Fraction of clients per gpu
 
 config_fit:
   lr: 0.01
@@ -12,7 +12,9 @@ config_fit:
   local_epochs: 1
 
 dataset:
-  name: "alkzar90/NIH-Chest-X-ray-dataset"
+  name: "hf-vision/chest-xray-pneumonia"  # dataset name on Hugging Face [ "BahaaEldin0/NIH-Chest-Xray-14", "hf-vision/chest-xray-pneumonia"]
+  num_classes: 2
   partitioner:
-    name: "DirichletPartitioner"
-    alpha: 1.0
+    name: "DirichletPartitioner"  # Type of data partition ["PathologicalPartitioner", "DirichletPartitioner", "Iid"]
+    alpha: 1.0 #heteroginity degree *DirichletPartitioner
+    num_classes_per_partition: 2  # number of classes per partition *PathologicalPartitioner
