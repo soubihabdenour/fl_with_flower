@@ -13,7 +13,7 @@ def apply_transforms(batch):
 
 # Model (simple CNN adapted from 'PyTorch: A 60 Minute Blitz')
 class Net(nn.Module):
-    def __init__(self, num_classes: int = 14) -> None:
+    def __init__(self, num_classes: int = 2) -> None:
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(1, 6, 5)
         self.conv1.weight.data.normal_(0, 0.1)

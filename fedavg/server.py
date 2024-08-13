@@ -34,7 +34,7 @@ def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
     # Aggregate and return custom metric (weighted average)
     return {"accuracy": sum(accuracies) / sum(examples)}
 
-def get_evaluate_fn(centralized_testset: Dataset):
+def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
     """Return an evaluation function for centralized evaluation."""
 
     def evaluate(
@@ -45,7 +45,7 @@ def get_evaluate_fn(centralized_testset: Dataset):
         # Determine device
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-        model = Net()
+        model = Net(num_classes=num_classes)
         #model = models.MobileNetV2(num_classes=2)
         #model.classifier[-1] = nn.Linear(in_features=4096, out_features=2)
 

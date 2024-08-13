@@ -21,7 +21,7 @@ def main(cfg: DictConfig):
     fds, centralized_testset = get_data(partitions_number=cfg.num_clients, config=cfg.dataset)
     # Start simulation
     history = fl.simulation.start_simulation(
-        client_fn=get_client_fn(fds, num_classes=cfg.num_classes),
+        client_fn=get_client_fn(fds, num_classes=cfg.model.num_classes),
         num_clients=cfg.num_clients,
         client_resources=client_resources,
         config=fl.server.ServerConfig(num_rounds=cfg.num_rounds),
@@ -31,7 +31,7 @@ def main(cfg: DictConfig):
             min_available_clients=10,
             on_fit_config_fn=fit_config,
             evaluate_metrics_aggregation_fn=weighted_average,  # Aggregate federated metrics
-            evaluate_fn=get_evaluate_fn(centralized_testset),  # Global evaluation function
+            evaluate_fn=get_evaluate_fn(centralized_testset, cfg.model.num_classes),  # Global evaluation function
 
         ),
         actor_kwargs={
