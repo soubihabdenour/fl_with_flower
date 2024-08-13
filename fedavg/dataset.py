@@ -13,12 +13,14 @@ def get_data(partitions_number: int, config: DictConfig):
             min_partition_size=0,
         )})
     elif config.partitioner == "PathologicalPartitioner":  # Non Iid
-        fds = FederatedDataset(dataset=config.name, partitioners={"train": DirichletPartitioner(
-            num_partitions=partitions_number,
-            partition_by="label",
-            num_classes_per_partition=config.partitioner.num_classes_per_partition,
-            min_partition_size=0,
-        )})
+        fds = FederatedDataset(dataset=config.name,
+                               data_dir=config.data_dir,
+                               partitioners={"train": DirichletPartitioner(
+                                   num_partitions=partitions_number,
+                                   partition_by="label",
+                                   num_classes_per_partition=config.partitioner.num_classes_per_partition,
+                                   min_partition_size=0,
+                               )})
     else:  # IiD
         fds = FederatedDataset(dataset=config.name, partitioners={"train": partitions_number})
 
