@@ -3,8 +3,7 @@ from flwr.common.typing import Scalar
 
 from torch.utils.data import DataLoader
 
-
-from fedavg.utils import train, test, apply_transforms, Net
+from fedavg.utils import test, apply_transforms, Net
 
 from collections import OrderedDict
 from typing import List, Tuple, Dict
@@ -19,10 +18,11 @@ import torch
 def fit_config(server_round: int) -> Dict[str, Scalar]:
     """Return a configuration with static batch size and (local) epochs."""
     config = {
-        "epochs": 5,  # Number of local epochs done by clients
-        "batch_size": 24,  # Batch size to use by clients during fit()
+        "epochs": 1,  # Number of local epochs done by clients
+        "batch_size": 32,  # Batch size to use by clients during fit()
     }
     return config
+
 
 def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
     """Aggregation function for (federated) evaluation metrics, i.e. those returned by
@@ -34,11 +34,12 @@ def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
     # Aggregate and return custom metric (weighted average)
     return {"accuracy": sum(accuracies) / sum(examples)}
 
+
 def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
     """Return an evaluation function for centralized evaluation."""
 
     def evaluate(
-        server_round: int, parameters: fl.common.NDArrays, config: Dict[str, Scalar]
+            server_round: int, parameters: fl.common.NDArrays, config: Dict[str, Scalar]
     ):
         """Use the entire CIFAR-10 test set for evaluation."""
 
@@ -64,6 +65,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         return loss, {"accuracy": accuracy}
 
     return evaluate
+
 
 def set_params(model: torch.nn.ModuleList, params: List[fl.common.NDArrays]):
     """Set model weights from a list of NumPy ndarrays."""

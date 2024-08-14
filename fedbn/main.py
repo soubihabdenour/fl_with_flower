@@ -1,13 +1,12 @@
-from pathlib import Path
 import hydra
-from hydra.core.hydra_config import HydraConfig
 from datasets import disable_progress_bar
 from omegaconf import DictConfig, OmegaConf
 import flwr as fl
 
-from fedavg.client import get_client_fn
-from fedavg.dataset import get_data
-from fedavg.server import fit_config, weighted_average, get_evaluate_fn
+from client import get_client_fn
+from dataset import get_data
+from fedbn.utils import NetWithBnAndFrozen
+from server import fit_config, get_evaluate_fn, evaluate_metrics_aggregation_fn, get_all_model_parameters
 from plot import smooth_plot
 
 
@@ -21,6 +20,7 @@ def main(cfg: DictConfig):
         "num_gpus": cfg.client_resources.num_gpus,
     }
     fds, centralized_testset = get_data(partitions_number=cfg.num_clients, config=cfg.dataset)
+    #model = NetWithBnAndFrozen(num_classes=cfg.model.num_classes, freeze_cnn_layer=False)
     # Start simulation
     history = fl.simulation.start_simulation(
         client_fn=get_client_fn(fds, num_classes=cfg.model.num_classes),
@@ -29,19 +29,18 @@ def main(cfg: DictConfig):
         config=fl.server.ServerConfig(num_rounds=cfg.num_rounds),
         strategy=fl.server.strategy.FedAvg(
             fraction_fit=0.5,  # Sample 10% of available clients for training
-            fraction_evaluate=0.1,  # Sample 5% of available clients for evaluation
+            fraction_evaluate=0.05,  # Sample 5% of available clients for evaluation
             min_available_clients=10,
-            on_fit_config_fn=fit_config,
-            evaluate_metrics_aggregation_fn=weighted_average,  # Aggregate federated metrics
+            on_fit_config_fn=fit_config(cfg.config_fit),
+            evaluate_metrics_aggregation_fn=evaluate_metrics_aggregation_fn,  # Aggregate federated metrics
             evaluate_fn=get_evaluate_fn(centralized_testset, cfg.model.num_classes),  # Global evaluation function
-
+            #initial_parameters=get_all_model_parameters(model)
         ),
         actor_kwargs={
             "on_actor_init_fn": disable_progress_bar  # disable tqdm on each actor/process spawning virtual clients
         },
     )
-    save_path = Path(HydraConfig.get().runtime.output_dir)
-    smooth_plot(data=history, title=f"{cfg.dataset.name.split('/')[-1]} - {cfg.dataset.partitioner.name.split('Partitioner')[0]} - {cfg.num_clients} clients with 10 per round", path=save_path)
+    smooth_plot(history, "chest-xray-pneumonia - IID - 100 clients with 10 per round")
 
 
 if __name__ == "__main__":

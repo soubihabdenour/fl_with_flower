@@ -1,7 +1,8 @@
 from pathlib import Path
+
 import hydra
-from hydra.core.hydra_config import HydraConfig
 from datasets import disable_progress_bar
+from hydra.core.hydra_config import HydraConfig
 from omegaconf import DictConfig, OmegaConf
 import flwr as fl
 
@@ -27,9 +28,10 @@ def main(cfg: DictConfig):
         num_clients=cfg.num_clients,
         client_resources=client_resources,
         config=fl.server.ServerConfig(num_rounds=cfg.num_rounds),
-        strategy=fl.server.strategy.FedAvg(
+        strategy=fl.server.strategy.FedXgbCyclic(
+            proximal_mu=cfg.strategy.proximal_mu,
             fraction_fit=0.5,  # Sample 10% of available clients for training
-            fraction_evaluate=0.1,  # Sample 5% of available clients for evaluation
+            fraction_evaluate=0.05,  # Sample 5% of available clients for evaluation
             min_available_clients=10,
             on_fit_config_fn=fit_config,
             evaluate_metrics_aggregation_fn=weighted_average,  # Aggregate federated metrics
