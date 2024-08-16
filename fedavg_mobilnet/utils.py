@@ -1,44 +1,32 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from flwr.client.mod import LocalDpMod
 from torchvision.transforms import Compose, Normalize, ToTensor, Grayscale, Resize
 
 
 # transformation to convert images to tensors and apply normalization
 def apply_transforms(batch):
-    transforms = Compose([Grayscale(num_output_channels=1), Resize((224, 224)), ToTensor(), Normalize((0.1307,), (0.3081,))])
-    batch["image"] = [transforms(img) for img in batch["image"]]
+    tf = Compose([
+        Resize((224, 224)),
+        Grayscale(num_output_channels=3),  # Convert grayscale to 3 channels
+        ToTensor(),
+        Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ])
+
+    # Apply transformations
+    batch["image"] = [tf(img) for img in batch["image"]]
     return batch
 
 
-# Model (simple CNN adapted from 'PyTorch: A 60 Minute Blitz')
-class Net(nn.Module):
-    def __init__(self, num_classes: int = 2) -> None:
-        super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 6, 5)
-        self.conv1.weight.data.normal_(0, 0.1)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.conv2 = nn.Conv2d(6, 16, 5)
-        self.conv2.weight.data.normal_(0, 0.1)
 
-        # Calculate the new input size for fc1
-        self.fc1 = nn.Linear(16 * 53 * 53, 120)
-        self.fc1.weight.data.normal_(0, 0.1)
-        self.fc2 = nn.Linear(120, 84)
-        self.fc2.weight.data.normal_(0, 0.1)
-        self.fc3 = nn.Linear(84, num_classes)
-        self.fc3.weight.data.normal_(0, 0.1)
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        # Flatten the tensor
-        x = x.view(-1, 16 * 53 * 53)
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = self.fc3(x)
-        return x
-
+def get_local_dp(config):
+    return LocalDpMod(
+        config.clipping_norm,
+        config.sensitivity,
+        config.epsilon,
+        config.delta
+    )
 
 # borrowed from Pytorch quickstart example
 def train(net, trainloader, optim, epochs, device: str):
@@ -52,6 +40,7 @@ def train(net, trainloader, optim, epochs, device: str):
             loss = criterion(net(images), labels)
             loss.backward()
             optim.step()
+
 
 
 # borrowed from Pytorch quickstart example

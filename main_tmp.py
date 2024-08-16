@@ -42,7 +42,7 @@ val_dataset = val_dataset.with_transform(apply_transforms)
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
 
-
+####
 
 model = models.mobilenet_v2(weights=models.MobileNet_V2_Weights.DEFAULT)
 
@@ -52,7 +52,7 @@ model.classifier[1] = nn.Linear(model.last_channel, num_classes)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
-
+#####
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)

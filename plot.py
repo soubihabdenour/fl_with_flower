@@ -41,13 +41,13 @@ def smooth_plot(data, title, path, smoothing_window=5):
         acc_smooth = acc
         round_smooth = round
 
-    plt.plot(round_smooth, acc_smooth, color="blue", label="Smoothed Accuracy")
+    plt.plot(round_smooth, acc_smooth, color="blue", label="Accuracy")
     plt.grid()
     plt.xlim(left=0)
     plt.ylim(bottom=0, top=1)
     plt.ylabel("Accuracy (%)")
     plt.xlabel("Round")
-    plt.title(title)
+    #plt.title(title)
     plt.legend()
     plt.savefig(path / 'graph.png', bbox_inches='tight', )
     plt.savefig(path / 'graph.pdf', bbox_inches='tight')
