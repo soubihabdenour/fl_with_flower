@@ -83,7 +83,7 @@ def main(cfg: DictConfig) -> None:  # pylint: disable=too-many-locals
         data_sizes=data_sizes,
         model=cfg.model,
         exp_config=cfg,
-        modes= [local_dp_obj]
+        #modes= [local_dp_obj]
     )
 
     # 4. Define your strategy

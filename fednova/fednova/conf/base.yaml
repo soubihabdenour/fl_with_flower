@@ -11,10 +11,10 @@ defaults:
 var_local_epochs: False
 datapath: fednova/data/
 checkpoint_path: fednova/checkpoints/
-num_clients: 16
+num_clients: 8
 num_epochs: 2
-num_rounds: 100
-batch_size: 32
+num_rounds: 10
+batch_size: 16
 NIID: True
 alpha: 0.1
 var_min_epochs: 2
@@ -33,8 +33,8 @@ model:
   _target_: fednova.models.VGG
 
 client_resources:
-  num_cpus: 1
-  num_gpus: 0.125
+  num_cpus: 8
+  num_gpus: 0.5
 
 hydra:
   sweep:
