@@ -3,9 +3,11 @@ from flwr_datasets import FederatedDataset
 from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from torchvision.transforms import ToTensor
 
 from torchvision import models
+
+from fedavg_mobilne.fedavg_mobilnet.utils import initialize_weights
+
 
 def apply_transforms(batch):
     tf = transforms.Compose([
@@ -48,7 +50,7 @@ model = models.mobilenet_v2(weights=models.MobileNet_V2_Weights.DEFAULT)
 
 num_classes = 2
 model.classifier[1] = nn.Linear(model.last_channel, num_classes)
-
+model.apply(initialize_weights)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
@@ -74,4 +76,19 @@ for epoch in range(num_epochs):
         running_loss += loss.item()
 
     print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {running_loss / len(train_loader):.4f}')
+
+    model.eval()
+    correct = 0
+    total = 0
+    with torch.no_grad():
+        for batch in val_loader:
+            inputs, labels = batch["image"], batch["label"]
+            inputs, labels = inputs.to(device), labels.to(device)
+            outputs = model(inputs)
+            _, predicted = torch.max(outputs.data, 1)
+
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+
+    print(f'Accuracy of the model on the validation images: {100 * correct / total:.2f}%')
 

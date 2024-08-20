@@ -5,8 +5,8 @@
 
 defaults:
   - _self_
-  - strategy: fednova
-  - optimizer: momentum
+  - strategy: fedavg
+  - optimizer: vanilla
 
 var_local_epochs: False
 datapath: fednova/data/
@@ -34,7 +34,7 @@ model:
 
 client_resources:
   num_cpus: 8
-  num_gpus: 0.5
+  num_gpus: 1
 
 hydra:
   sweep:

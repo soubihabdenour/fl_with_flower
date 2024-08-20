@@ -1,3 +1,6 @@
+import csv
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -41,6 +44,14 @@ def smooth_plot(data, title, path, smoothing_window=5):
         acc_smooth = acc
         round_smooth = round
 
+    # Save the smoothed results to a CSV file
+    csv_path = Path(path) / 'smoothed_results.csv'
+    with open(csv_path, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Round", "Accuracy"])
+        writer.writerows(zip(round_smooth, acc_smooth))
+
+    print(f"Results saved to {csv_path}")
     plt.plot(round_smooth, acc_smooth, color="blue", label="Accuracy")
     plt.grid()
     plt.xlim(left=0)

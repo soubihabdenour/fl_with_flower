@@ -1,5 +1,6 @@
 from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import DirichletPartitioner
+from fontTools.subset import subset
 from omegaconf import DictConfig
 
 
@@ -7,7 +8,7 @@ def get_data(partitions_number: int, config: DictConfig):
 
     if config.partitioner == "DirichletPartitioner":  # Non IiD
         fds = FederatedDataset(dataset=config.name,
-                                subset= "image-classification",
+                                subset= config.subset,
                                partitioners={"train": DirichletPartitioner(
                                    num_partitions=partitions_number,
                                    partition_by="label",
@@ -17,6 +18,7 @@ def get_data(partitions_number: int, config: DictConfig):
         )})
     elif config.partitioner == "PathologicalPartitioner":  # Non Iid
         fds = FederatedDataset(dataset=config.name,
+                               subset=config.subset,
                                data_dir=config.data_dir,
                                partitioners={"train": DirichletPartitioner(
                                    num_partitions=partitions_number,
@@ -25,7 +27,9 @@ def get_data(partitions_number: int, config: DictConfig):
                                    min_partition_size=0,
                                )})
     else:  # IiD
-        fds = FederatedDataset(dataset=config.name, partitioners={"train": partitions_number})
+        fds = FederatedDataset(dataset=config.name,
+                               subset=config.subset,
+                               partitioners={"train": partitions_number})
 
     centralized_testset = fds.load_split("test")
 

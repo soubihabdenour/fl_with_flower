@@ -18,7 +18,7 @@ from fedavg_mobilnet.utils import test, apply_transforms
 def fit_config(epochs: int) -> Dict[str, Scalar]:
     """Return a configuration with static batch size and (local) epochs."""
     config = {
-        "epochs": 1,  # Number of local epochs done by clients
+        "epochs": 3,  # Number of local epochs done by clients
         "batch_size": 32,  # Batch size to use by clients during fit()
     }
     return config
