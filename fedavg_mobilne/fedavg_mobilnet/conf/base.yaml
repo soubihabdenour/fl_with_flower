@@ -1,7 +1,7 @@
 ---
 
 seed: 42
-num_clients: 20
+num_clients: 100
 num_rounds: 20
 client_resources:
   num_cpus: 24
@@ -15,7 +15,7 @@ config_fit:
 
 dataset:
   name: "albertvillanova/medmnist-v2"  # dataset name on Hugging Face [ "BahaaEldin0/NIH-Chest-Xray-14", BahaaEldin0/NIH-Chest-Xray-14-with-Augmentation, "hf-vision/chest-xray-pneumonia", "marmal88/skin_cancer", SilpaCS/Augmented_alzheimer]
-  subset: "dermamnist"
+  subset: "pathmnist"
   data_dir: "./data"
   seed: 123
   partitioner:
@@ -24,7 +24,7 @@ dataset:
     num_classes_per_partition: 2  # number of classes per partition *PathologicalPartitioner
 
 model:
-  num_classes: 7
+  num_classes: 9
 
 dp:
   delta: 0.1
