@@ -6,7 +6,7 @@ from torchvision import transforms
 
 from torchvision import models
 
-from fedavg_mobilne.fedavg_mobilnet.utils import initialize_weights
+from fedavg_mobilnet.fedavg_mobilnet.utils import initialize_weights
 
 
 def apply_transforms(batch):

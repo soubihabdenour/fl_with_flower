@@ -1,43 +1,47 @@
+"""pytorchexample: A Flower / PyTorch app."""
+
 from collections import OrderedDict
 from typing import List
 import flwr as fl
 import torch
 from flwr_datasets import FederatedDataset
+from torch import nn, optim
 from torch.utils.data import DataLoader
-
-from fedbn.utils import train, test, apply_transforms, Net
-from fedbn.utils import NetWithBnAndFrozen
 from torchvision import models
-from torch import nn
+
+from fedavgm_mobilnet.utils import train, test, apply_transforms
+
+
 # Define Flower Client
 class FlowerClient(fl.client.NumPyClient):
     def __init__(self, trainset, valset, num_classes):
         self.trainset = trainset
         self.valset = valset
 
-        # Instantiate model
         self.model = models.mobilenet_v2(weights=models.MobileNet_V2_Weights.DEFAULT)
 
         self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
 
-        # Determine device
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        self.model.to(self.device)  # send model to device
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = self.model.to(self.device)
 
     def get_parameters(self, config):
         return [val.cpu().numpy() for _, val in self.model.state_dict().items()]
+
+    def get_mal_parameters(self, config):
+        return [val.cpu().numpy() * 1000 for _, val in self.model.state_dict().items()]
 
     def fit(self, parameters, config):
         set_params(self.model, parameters)
 
         # Read from config
-        batch, epochs = config["batch_size"], config["epochs"]
+        batch, epochs = 64, 2
 
         # Construct dataloader
         trainloader = DataLoader(self.trainset, batch_size=batch, shuffle=True)
 
         # Define optimizer
-        optimizer = torch.optim.AdamW(self.model.parameters(), lr=0.01)
+        optimizer = optim.Adam(self.model.parameters(), lr=0.001)
         # Train
         train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
 
