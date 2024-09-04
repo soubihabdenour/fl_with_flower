@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 # Load the CSV files
 file_paths = [
-    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/outputs/2024-08-28/17-34-37/PathologicalPartitioner_30.csv',
-    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/outputs/2024-08-29/09-54-23/PathologicalPartitioner_30.csv',
-    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/outputs/2024-08-29/10-08-37/PathologicalPartitioner_30.csv'
+    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/outputs/2024-08-30/12-15-19/PathologicalPartitioner_30.csv',
+    '/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/outputs/2024-09-01/17-25-14/PathologicalPartitioner_30.csv',
+    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/outputs/2024-08-30/12-15-19/PathologicalPartitioner_30.csv'
 ]
 
 # Read the data from each file
