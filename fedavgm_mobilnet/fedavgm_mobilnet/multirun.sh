@@ -4,7 +4,7 @@ cd ..
 # Experiment 2
 echo "Starting Experiment 3"
 
-python -m fedavgm_mobilnet.main dataset.subset="pathmnist" dataset.partitioner.name="PathologicalPartitioner" dataset.partitioner.num_classes_per_partition=7 model.num_classes=9
+pyt -m fedavgm_mobilnet.main dataset.subset="pathmnist" dataset.partitioner.name="PathologicalPartitioner" dataset.partitioner.num_classes_per_partition=7 model.num_classes=9
 
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
