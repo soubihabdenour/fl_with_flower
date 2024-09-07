@@ -5,8 +5,8 @@ num_clients: 50
 fraction_train_clients: 0.1
 num_rounds: 100
 client_resources:
-  num_cpus: 16
-  num_gpus: 0.25  # Fraction of clients per gpu
+  num_cpus: 24
+  num_gpus: 0.125  # Fraction of clients per gpu
 
 config_fit:
   lr: 0.01
@@ -16,7 +16,7 @@ config_fit:
 
 dataset:
   name: "albertvillanova/medmnist-v2"  # dataset name on Hugging Face [ "BahaaEldin0/NIH-Chest-Xray-14", BahaaEldin0/NIH-Chest-Xray-14-with-Augmentation, "hf-vision/chest-xray-pneumonia", "marmal88/skin_cancer", SilpaCS/Augmented_alzheimer]
-  subset: "bloodmnist"
+  subset: "PathMNIST"
   data_dir: "./data"
   seed: 123
   partitioner:
