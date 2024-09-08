@@ -5,7 +5,7 @@ cd ..
 # Experiment 2
 echo "Starting Experiment 3"
 
-python -m fednova_mobilnet.main dataset.partitioner.name="PathologicalPartitioner"
+python3 -m fedavgm_mobilnet.main dataset.partitioner.name="PathologicalPartitioner"
 
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
@@ -14,7 +14,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Starting Experiment 2"
-python -m fednova_mobilnet.main dataset.partitioner.name="DirichletPartitioner"
+python3 -m fedavgm_mobilnet.main dataset.partitioner.name="DirichletPartitioner"
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
   echo "Experiment 2 failed!"
@@ -23,7 +23,7 @@ fi
 # Experiment 1
 echo "Starting Experiment 1 "
 
-python -m fednova_mobilnet.main
+python3 -m fedavgm_mobilnet.main
 
 # Check if Experiment 1 succeeded
 if [ $? -ne 0 ]; then
