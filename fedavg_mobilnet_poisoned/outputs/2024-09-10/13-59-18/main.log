@@ -1,0 +1,1314 @@
+[2024-09-10 13:59:21,056][flwr][INFO] - Starting Flower simulation, config: num_rounds=100, no round_timeout
+[2024-09-10 13:59:26,968][flwr][INFO] - Flower VCE: Ray initialized with resources: {'CPU': 32.0, 'node:__internal_head__': 1.0, 'object_store_memory': 8259330048.0, 'node:115.145.171.128': 1.0, 'memory': 16518660096.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+[2024-09-10 13:59:26,968][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-09-10 13:59:26,968][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 16, 'num_gpus': 0.25}
+[2024-09-10 13:59:26,976][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 2 actors
+[2024-09-10 13:59:26,976][flwr][INFO] - [INIT]
+[2024-09-10 13:59:26,977][flwr][INFO] - Requesting initial parameters from one random client
+[2024-09-10 13:59:29,744][flwr][INFO] - Received initial parameters from one random client
+[2024-09-10 13:59:29,744][flwr][INFO] - Evaluating initial global parameters
+[2024-09-10 13:59:34,056][flwr][INFO] - initial parameters (loss, other metrics): 239.39524054527283, {'accuracy': 0.12130955860859398}
+[2024-09-10 13:59:34,056][flwr][INFO] - 
+[2024-09-10 13:59:34,056][flwr][INFO] - [ROUND 1]
+[2024-09-10 13:59:34,056][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 13:59:36,298][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+
+[2024-09-10 13:59:36,306][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+[2024-09-10 13:59:36,662][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+
+[2024-09-10 13:59:36,662][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+[2024-09-10 13:59:37,295][flwr][INFO] - aggregate_fit: received 3 results and 2 failures
+[2024-09-10 13:59:37,317][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-09-10 13:59:41,408][flwr][INFO] - fit progress: (1, 187.8091207742691, {'accuracy': 0.3919906460099386}, 7.352013513999964)
+[2024-09-10 13:59:41,408][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 13:59:41,683][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 13:59:41,684][flwr][INFO] - 
+[2024-09-10 13:59:41,684][flwr][INFO] - [ROUND 2]
+[2024-09-10 13:59:41,684][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 13:59:41,966][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:41,966][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:42,354][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:42,354][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:42,706][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:42,706][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:43,409][flwr][INFO] - aggregate_fit: received 2 results and 3 failures
+[2024-09-10 13:59:47,624][flwr][INFO] - fit progress: (2, 127.79931861162186, {'accuracy': 0.5445776088862906}, 13.567800104999833)
+[2024-09-10 13:59:47,624][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 13:59:47,802][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 13:59:47,802][flwr][INFO] - 
+[2024-09-10 13:59:47,802][flwr][INFO] - [ROUND 3]
+[2024-09-10 13:59:47,803][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 13:59:48,032][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:48,033][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:48,485][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:48,486][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:48,902][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:48,902][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:49,642][flwr][INFO] - aggregate_fit: received 2 results and 3 failures
+[2024-09-10 13:59:53,830][flwr][INFO] - fit progress: (3, 135.56521040201187, {'accuracy': 0.6004092370651856}, 19.773491623999917)
+[2024-09-10 13:59:53,830][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 13:59:54,046][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 13:59:54,047][flwr][INFO] - 
+[2024-09-10 13:59:54,047][flwr][INFO] - [ROUND 4]
+[2024-09-10 13:59:54,047][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 13:59:54,299][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:54,299][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:54,770][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:54,770][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:55,100][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:55,100][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:55,237][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:55,237][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 13:59:55,238][flwr][INFO] - aggregate_fit: received 1 results and 4 failures
+[2024-09-10 13:59:59,348][flwr][INFO] - fit progress: (4, 236.95266449451447, {'accuracy': 0.5428237357497807}, 25.291744145999928)
+[2024-09-10 13:59:59,348][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 13:59:59,530][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 13:59:59,530][flwr][INFO] - 
+[2024-09-10 13:59:59,530][flwr][INFO] - [ROUND 5]
+[2024-09-10 13:59:59,530][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 13:59:59,766][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+[2024-09-10 13:59:59,766][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/client.py", line 46, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/fedavg_mobilnet_poisoned/utils.py", line 41, in train
+    loss.backward()
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13045, ip=115.145.171.128, actor_id=3c6b998afad198f1133f7e4401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x796898bcee50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: cuDNN error: CUDNN_STATUS_INTERNAL_ERROR
+[2024-09-10 14:00:02,652][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-10 14:00:06,789][flwr][INFO] - fit progress: (5, 76.04296769201756, {'accuracy': 0.7845659163987139}, 32.73250602799999)
+[2024-09-10 14:00:06,789][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 14:00:06,961][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 14:00:06,961][flwr][INFO] - 
+[2024-09-10 14:00:06,961][flwr][INFO] - [ROUND 6]
+[2024-09-10 14:00:06,961][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 14:00:10,299][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-10 14:00:14,479][flwr][INFO] - fit progress: (6, 47.08426247164607, {'accuracy': 0.8611517100263081}, 40.42265350299999)
+[2024-09-10 14:00:14,479][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 14:00:14,650][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 14:00:14,651][flwr][INFO] - 
+[2024-09-10 14:00:14,651][flwr][INFO] - [ROUND 7]
+[2024-09-10 14:00:14,651][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 14:00:18,183][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-10 14:00:22,330][flwr][INFO] - fit progress: (7, 46.244105361402035, {'accuracy': 0.866997953814674}, 48.274250864999885)
+[2024-09-10 14:00:22,330][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 14:00:22,535][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 14:00:22,535][flwr][INFO] - 
+[2024-09-10 14:00:22,535][flwr][INFO] - [ROUND 8]
+[2024-09-10 14:00:22,535][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 14:00:25,920][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-10 14:00:30,089][flwr][INFO] - fit progress: (8, 34.59690350200981, {'accuracy': 0.8947676118094124}, 56.03337422300001)
+[2024-09-10 14:00:30,090][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 14:00:30,286][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 14:00:30,286][flwr][INFO] - 
+[2024-09-10 14:00:30,286][flwr][INFO] - [ROUND 9]
+[2024-09-10 14:00:30,286][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 14:00:33,919][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-10 14:00:38,346][flwr][INFO] - fit progress: (9, 46.76556846499443, {'accuracy': 0.8512130955860859}, 64.2895466519999)
+[2024-09-10 14:00:38,346][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 14:00:38,541][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 14:00:38,542][flwr][INFO] - 
+[2024-09-10 14:00:38,542][flwr][INFO] - [ROUND 10]
+[2024-09-10 14:00:38,542][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 14:00:42,104][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-10 14:00:46,542][flwr][INFO] - fit progress: (10, 35.75822999328375, {'accuracy': 0.9032446653025431}, 72.48613845799991)
+[2024-09-10 14:00:46,542][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 14:00:46,812][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 14:00:46,812][flwr][INFO] - 
+[2024-09-10 14:00:46,812][flwr][INFO] - [ROUND 11]
+[2024-09-10 14:00:46,812][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 14:00:50,471][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-10 14:00:54,848][flwr][INFO] - fit progress: (11, 28.647291991859674, {'accuracy': 0.9102601578485823}, 80.79188765599997)
+[2024-09-10 14:00:54,848][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-10 14:00:55,032][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-10 14:00:55,032][flwr][INFO] - 
+[2024-09-10 14:00:55,032][flwr][INFO] - [ROUND 12]
+[2024-09-10 14:00:55,032][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-10 14:00:58,525][flwr][INFO] - aggregate_fit: received 5 results and 0 failures

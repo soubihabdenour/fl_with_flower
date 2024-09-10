@@ -27,7 +27,7 @@ def main(cfg: DictConfig):
         num_clients=cfg.num_clients,
         client_resources=client_resources,
         config=fl.server.ServerConfig(num_rounds=cfg.num_rounds),
-        strategy=fl.server.strategy.Fed(
+        strategy=fl.server.strategy.FedAvg(
             fraction_fit=cfg.fraction_train_clients,  # Sample 10% of available clients for training
             fraction_evaluate=0.05,  # Sample 5% of available clients for evaluation
             min_available_clients=3,

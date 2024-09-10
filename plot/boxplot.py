@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 # File paths
 file_paths = [
-    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/outputs/2024-08-30/12-15-19/PathologicalPartitioner_30.csv',
+    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/outputs/2024-08-30/12-15-19/PathologicalPartitioner_30.csv',
     '/home/abdenour/PycharmProjects/fl_with_flower/fedprox_mobilnet/outputs/2024-09-01/17-25-14/PathologicalPartitioner_30.csv',
-    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/outputs/2024-08-30/12-15-19/PathologicalPartitioner_30.csv'
+    '/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet_poisoned/outputs/2024-08-30/12-15-19/PathologicalPartitioner_30.csv'
 ]
 
 # Load data
