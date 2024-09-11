@@ -9,6 +9,8 @@ import flwr as fl
 from fedavg_mobilnet_poisoned.client import get_client_fn
 from fedavg_mobilnet_poisoned.dataset import get_data
 from fedavg_mobilnet_poisoned.server import fit_config, weighted_average, get_evaluate_fn
+from torch.cuda import seed_all
+
 from plot import smooth_plot
 
 
@@ -21,6 +23,7 @@ def main(cfg: DictConfig):
         "num_cpus": cfg.client_resources.num_cpus,
         "num_gpus": cfg.client_resources.num_gpus,
     }
+    random.seed(0)
     mal_ids = random.sample(range(0, cfg.num_clients), int(cfg.fraction_mal_clients * cfg.num_clients))
     fds, centralized_testset = get_data(partitions_number=cfg.num_clients, config=cfg.dataset, path=save_path)
     # Start simulation

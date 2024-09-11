@@ -4,11 +4,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Define your datasets, partitioners, and algorithms
-datasets = ['BloodMNIST', 'PathMNIST', 'TissueMNIST']
-algorithms = ['fedavg', 'fedavgm', 'fedprox', 'fedbn', 'fednova']
+datasets = ['BloodMNIST']
+algorithms = ['fedavg']
 partitioners = {
-    'drichlet': ['alpha0.1', 'alpha0.3', 'alpha0.9'],
-    'pathological': ['classes02', 'classes04', 'classes07']
+    'iid_poisoned': ['poison_fraction0.8', 'poison_fraction0.8', 'poison_fraction0.8', 'poison_fraction0.8']
 }
 
 # Base directory where the CSV results are stored
@@ -18,9 +17,6 @@ base_dir = '/home/abdenour/PycharmProjects/fl_with_flower/results'
 algorithm_colors = {
     'fedavg': '#1f77b4',  # Blue
     'fedavgm': '#ff7f0e',  # Orange
-    'fedprox': '#2ca02c',  # Green
-    'fedbn': '#d62728',    # Red
-    'fednova': '#9467bd'   # Purple
 }
 
 # Function to load accuracy data from a CSV file
@@ -32,53 +28,53 @@ def load_accuracy_data(algorithm, dataset, partitioner, partitioner_type, file_n
         print(f"File {csv_path} does not exist.")
         return pd.DataFrame()
 
-# Function to create 3x3 subplots for given algorithms, datasets, and partitioners (Bar Plot for Mean Accuracy of Tail 10 Rounds)
-def create_figure(figure_title, partitioner_type):
-    fig, axs = plt.subplots(3, 3, figsize=(12, 12))
+# Function to create a single subplot for iid_poisoned partitioner with error bars
+def create_single_iid_poisoned_subplot(figure_title, partitioner_type):
+    fig, ax = plt.subplots(figsize=(8, 6))
     fig.suptitle(figure_title, fontsize=16)
 
-    for i, dataset in enumerate(datasets):  # Row for each dataset
-        partitioner_files = partitioners[partitioner_type]  # Get the files for the current partitioner
-        for j, partitioner_file in enumerate(partitioner_files):  # Column for each partitioner
-            ax = axs[i, j]
-            bar_width = 0.7  # Width of each bar
-            x_positions = np.arange(len(algorithms))  # Position of bars for each algorithm
+    dataset = datasets[0]  # Use only 'BloodMNIST' dataset
+    partitioner_files = partitioners[partitioner_type]  # Get the files for the 'iid_poisoned' partitioner
 
-            mean_accuracies = []  # Store the mean accuracies for each algorithm
-            for k, algorithm in enumerate(algorithms):
-                # Load accuracy data for each algorithm-dataset-partitioner combination
-                data = load_accuracy_data(algorithm, dataset, partitioner_type, partitioner_type, partitioner_file)
+    bar_width = 0.35  # Width of each bar
+    x_positions = np.arange(len(partitioner_files))  # Position of bars for each partitioner
 
-                if not data.empty:
-                    # Extract the last 10 rounds (tail) and calculate the mean accuracy
-                    tail_data = data.tail(10)
-                    mean_accuracy = tail_data['Accuracy'].mean()
-                    mean_accuracies.append(mean_accuracy)
-                else:
-                    mean_accuracies.append(0)  # Handle the case where there's no data
+    for k, algorithm in enumerate(algorithms):
+        mean_accuracies = []  # Store the mean accuracies for the algorithm
+        std_devs = []  # Store the standard deviation for error bars
+        for j, partitioner_file in enumerate(partitioner_files):
+            # Load accuracy data for each algorithm-dataset-partitioner combination
+            data = load_accuracy_data(algorithm, dataset, partitioner_type, partitioner_type, partitioner_file)
 
-            # Create a bar plot for the mean accuracies of all algorithms, with distinct colors for each algorithm
-            ax.bar(x_positions, mean_accuracies, width=bar_width, color=[algorithm_colors[alg] for alg in algorithms], tick_label=algorithms)
+            if not data.empty:
+                # Extract the last 10 rounds (tail) and calculate the mean and standard deviation of accuracy
+                tail_data = data.tail(40)
+                mean_accuracy = tail_data['Accuracy'].mean()
+                std_dev = tail_data['Accuracy'].std()  # Standard deviation for error bars
+                mean_accuracies.append(mean_accuracy)
+                std_devs.append(std_dev)
+            else:
+                mean_accuracies.append(0)  # Handle the case where there's no data
+                std_devs.append(0)  # No error bar if there's no data
 
-            # Set y-axis limits to [0, 1]
-            ax.set_ylim([0, 1])
+        # Create a bar plot for the mean accuracies of this algorithm with error bars
+        ax.bar(x_positions + k * bar_width, mean_accuracies, yerr=std_devs, width=bar_width, label=algorithm,
+               color=algorithm_colors[algorithm], capsize=5)
 
-            # Set labels and titles for each subplot
-            if partitioner_type == 'drichlet':
-                title = f"Dirichlet - Alpha {partitioner_file.replace('alpha', '').replace('csv', '')}"
-            elif partitioner_type == 'pathological':
-                title = f"Pathological - Classes {partitioner_file.replace('classes', '')}"
+    # Set y-axis limits to [0, 1]
+    ax.set_ylim([0, 1])
 
-            ax.set_title(f"{title} - {dataset}")
-            ax.set_xlabel('Algorithm')
-            ax.set_ylabel('Mean Accuracy (Tail 10)')
-            ax.grid(True)
+    # Set labels, legend, and title for the subplot
+    ax.set_xticks(x_positions + bar_width / 2)
+    ax.set_xticklabels(partitioner_files)
+    ax.set_xlabel('Partitioner File (Poison Fractions)')
+    ax.set_ylabel('Mean Accuracy (Tail 10)')
+    ax.legend(title="Algorithm")
+    ax.grid(True)
 
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig(os.path.join(base_dir, figure_title + '.pdf'))
     plt.show()
 
-
-# Create two figures: one for Dirichlet partitioner and one for Pathological partitioner (Bar plot of Mean Tail 10)
-create_figure('Figure 1: Dirichlet Partitioner Mean Accuracy Comparisons (Bar Plot Tail 10)', 'drichlet')
-create_figure('Figure 2: Pathological Partitioner Mean Accuracy Comparisons (Bar Plot Tail 10)', 'pathological')
+# Create the figure for iid_poisoned partitioner with error bars
+create_single_iid_poisoned_subplot('Figure: IID Poisoned Partitioner Mean Accuracy Comparison with Error Bars', 'iid_poisoned')
