@@ -1,0 +1,30 @@
+seed: 42
+num_clients: 50
+fraction_train_clients: 0.1
+num_rounds: 100
+client_resources:
+  num_cpus: 16
+  num_gpus: 0.25
+config_fit:
+  lr: 0.01
+  momentum: 0.9
+  local_epochs: 1
+  local_batch_size: 32
+dataset:
+  name: albertvillanova/medmnist-v2
+  subset: bloodmnist
+  data_dir: ./data
+  seed: 123
+  partitioner:
+    name: DirichletPartitioner
+    alpha: 0.1
+    num_classes_per_partition: 2
+model:
+  num_classes: 9
+dp:
+  delta: 0.1
+  epsilon: 0.1
+  sensitivity: 0.1
+  clipping_norm: 0.1
+plot:
+  smoothing_window: 1
