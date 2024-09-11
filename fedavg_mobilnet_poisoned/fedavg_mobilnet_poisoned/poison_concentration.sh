@@ -5,7 +5,7 @@ cd ..
 # Experiment 2
 echo "Starting Experiment 3"
 
-#python -m fedavg_mobilnet_poisoned.main poison_fraction=0.8
+python -m fedavg_mobilnet_poisoned.main poison_fraction=0.8
 
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
@@ -16,7 +16,7 @@ fi
 # Experiment 2
 echo "Starting Experiment 3"
 
-#python -m fedavg_mobilnet_poisoned.main poison_fraction=0.5
+python -m fedavg_mobilnet_poisoned.main poison_fraction=0.5
 
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
@@ -27,7 +27,7 @@ fi
 # Experiment 2
 echo "Starting Experiment 3"
 
-#python -m fedavg_mobilnet_poisoned.main poison_fraction=0.3
+python -m fedavg_mobilnet_poisoned.main poison_fraction=0.3
 
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
@@ -38,7 +38,7 @@ fi
 # Experiment 2
 echo "Starting Experiment 3"
 
-#python -m fedavg_mobilnet_poisoned.main poison_fraction=0.1
+python -m fedavg_mobilnet_poisoned.main poison_fraction=0.1
 
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
