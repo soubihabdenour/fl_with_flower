@@ -89,8 +89,8 @@ def get_client_fn(dataset: FederatedDataset, num_classes, poison_fraction ,mal_i
         # poison injection
 
         # Assuming partition is your dataset object
-        #num_to_poison = int(poison_fraction * len(client_dataset))  # Number of examples to poison
-        num_to_poison =len(client_dataset) # Number of examples to poison
+        num_to_poison = int(poison_fraction * len(client_dataset))  # Number of examples to poison
+        #num_to_poison =len(client_dataset) # Number of examples to poison
 
         # Randomly choose indices to poison
         indices_to_poison = random.sample(range(len(client_dataset)), num_to_poison)

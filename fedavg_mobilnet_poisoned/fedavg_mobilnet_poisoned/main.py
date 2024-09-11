@@ -24,8 +24,8 @@ def main(cfg: DictConfig):
         "num_gpus": cfg.client_resources.num_gpus,
     }
     random.seed(0)
-    #mal_ids = random.sample(range(0, cfg.num_clients), int(cfg.fraction_mal_clients * cfg.num_clients))
-    mal_ids = random.sample(range(0, cfg.num_clients), int(1.0 * cfg.num_clients))
+    mal_ids = random.sample(range(0, cfg.num_clients), int(cfg.fraction_mal_clients * cfg.num_clients))
+    #mal_ids = random.sample(range(0, cfg.num_clients), int(1.0 * cfg.num_clients))
     print(mal_ids, '====================================================')
     fds, centralized_testset = get_data(partitions_number=cfg.num_clients, config=cfg.dataset, path=save_path)
     # Start simulation
