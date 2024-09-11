@@ -80,6 +80,7 @@ def get_client_fn(dataset: FederatedDataset, num_classes, poison_fraction ,mal_i
     """
 
     def client_fn(context) -> fl.client.Client:
+        print("zbii======================================")
         """Construct a FlowerClient with its own dataset partition."""
         # Let's get the partition corresponding to the i-th client
         client_dataset = dataset.load_partition(
@@ -88,7 +89,8 @@ def get_client_fn(dataset: FederatedDataset, num_classes, poison_fraction ,mal_i
         # poison injection
 
         # Assuming partition is your dataset object
-        num_to_poison = int(poison_fraction * len(client_dataset))  # Number of examples to poison
+        #num_to_poison = int(poison_fraction * len(client_dataset))  # Number of examples to poison
+        num_to_poison =len(client_dataset) # Number of examples to poison
 
         # Randomly choose indices to poison
         indices_to_poison = random.sample(range(len(client_dataset)), num_to_poison)
@@ -101,11 +103,10 @@ def get_client_fn(dataset: FederatedDataset, num_classes, poison_fraction ,mal_i
                 current_label = example['label']
                 # Exclude the current label from possible choices and choose a new one randomly
                 new_label = random.choice([label for label in possible_labels if label != current_label])
+                #print('id', context.node_config["partition-id"],':', current_label,':', new_label,"-----------")
                 example['label'] = new_label
             return example
-        if context.node_config["partition-id"] in mal_ids:
-            # Apply the function to the dataset using `map`, and pass indices
-            client_dataset = client_dataset.map(update_label, with_indices=True)
+
 
 
         # Now let's split it into train (90%) and validation (10%)
@@ -113,7 +114,13 @@ def get_client_fn(dataset: FederatedDataset, num_classes, poison_fraction ,mal_i
 
         trainset = client_dataset_splits["train"]
         valset = client_dataset_splits["test"]
-
+        print(context.node_config["partition-id"], mal_ids, '=====================================================')
+        if int(context.node_config["partition-id"]) in mal_ids:
+            print('yes=======================================================================')
+            # Apply the function to the dataset using `map`, and pass indices
+            trainset = trainset.map(update_label, with_indices=True)
+        else:
+            print('no=======================================================================')
         # Now we apply the transform to each batch.
         trainset = trainset.with_transform(apply_transforms)
         valset = valset.with_transform(apply_transforms)

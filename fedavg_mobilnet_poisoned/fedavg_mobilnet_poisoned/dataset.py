@@ -50,4 +50,5 @@ def get_data(partitions_number: int, config: DictConfig, path):
     # )
     # path = Path(path) / f"{config.subset}_{config.partitioner.name}.pdf"
     # fig2.savefig(path, bbox_inches='tight')
+    print(len(centralized_testset))
     return fds, centralized_testset
