@@ -123,9 +123,10 @@ def get_client_fn(  # pylint: disable=too-many-arguments
 ) -> Callable[[str], FedNovaClient]:
     """Return a generator function to create a FedNova client."""
 
-    def client_fn(cid: str) -> FedNovaClient:
+    def client_fn(context) -> FedNovaClient:
         """Create a Flower client representing a single organization."""
         # Load model
+        cid = int(context.node_config["partition-id"])
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         net = instantiate(model)
 
