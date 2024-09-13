@@ -40,8 +40,9 @@ def main(cfg: DictConfig):
     #print('booooooooooooooooooooooooooooooo')
     eval_fn = partial(test, instantiate(cfg.model), centralized_testset, device)
     print('booooooooooooooooooooooooooooooo')
+    print(cfg)
     strategy = instantiate(
-        FedNova,
+        cfg.strategy.strategy,
         evaluate_metrics_aggregation_fn=weighted_average,
         accept_failures=False,
         on_fit_config_fn=fit_config_fn,
