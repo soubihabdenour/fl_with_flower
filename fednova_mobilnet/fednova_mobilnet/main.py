@@ -29,13 +29,17 @@ def main(cfg: DictConfig):
         "num_gpus": cfg.client_resources.num_gpus,
     }
     fds, centralized_testset = get_data(partitions_number=cfg.num_clients, config=cfg.dataset, path=save_path)
+
+
     # ndarrays = [
     #     layer_param.cpu().numpy()
     #     for _, layer_param in instantiate(cfg.model).state_dict().items()
     # ]
     # init_parameters = ndarrays_to_parameters(ndarrays)
     fit_config_fn = partial(fit_config, cfg)
+    #print('booooooooooooooooooooooooooooooo')
     eval_fn = partial(test, instantiate(cfg.model), centralized_testset, device)
+    print('booooooooooooooooooooooooooooooo')
     strategy = instantiate(
         FedNova,
         evaluate_metrics_aggregation_fn=weighted_average,

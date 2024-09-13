@@ -11,7 +11,7 @@ from torchvision import models
 
 from fedavg_mobilnet.utils import train, test, apply_transforms
 
-from fedavg_mobilnet.dataset import poison_labels
+
 
 
 # Define Flower Client

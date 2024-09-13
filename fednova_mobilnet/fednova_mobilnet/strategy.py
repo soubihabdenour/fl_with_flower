@@ -19,14 +19,13 @@ from flwr.server.client_proxy import ClientProxy
 from flwr.server.strategy import FedAvg
 from flwr.server.strategy.aggregate import aggregate
 from omegaconf import DictConfig
-
+from colorama import Fore, Back, Style
 
 class FedNova(FedAvg):
     """FedNova."""
 
     def __init__(self, exp_config: DictConfig, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         # Maintain a momentum buffer for the weight updates across rounds of training
         self.global_momentum_buffer: List[NDArray] = []
         if self.initial_parameters is not None:

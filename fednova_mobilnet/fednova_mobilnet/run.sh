@@ -5,7 +5,7 @@ cd ..
 # Experiment 2
 echo "Starting Experiment 3"
 
-python -m fednova_mobilnet.main dataset.partitioner.name="PathologicalPartitioner"
+python -m fednova_mobilnet.main
 
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
