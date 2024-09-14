@@ -1,0 +1,118 @@
+[2024-08-13 02:34:46,217][flwr][INFO] - Starting Flower simulation, config: num_rounds=10, no round_timeout
+[2024-08-13 02:34:49,204][flwr][INFO] - Flower VCE: Ray initialized with resources: {'node:115.145.171.128': 1.0, 'memory': 14720940443.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'CPU': 32.0, 'node:__internal_head__': 1.0, 'object_store_memory': 7360470220.0}
+[2024-08-13 02:34:49,205][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-08-13 02:34:49,205][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 2, 'num_gpus': 0.2}
+[2024-08-13 02:34:49,213][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+[2024-08-13 02:34:49,213][flwr][INFO] - [INIT]
+[2024-08-13 02:34:49,213][flwr][INFO] - Requesting initial parameters from one random client
+[2024-08-13 02:34:51,110][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: 6c45510684a01fe47160cf6801000000
+	pid: 518400
+	namespace: f521f703-f4c8-43b5-ab0e-cf6ef3bc7468
+	ip: 115.145.171.128
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code 2.
+[2024-08-13 02:34:51,110][flwr][WARNING] - Actor(6c45510684a01fe47160cf6801000000) will be remove from pool.
+[2024-08-13 02:34:51,111][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    raise ex
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 866, in get_objects
+    raise value
+ray.exceptions.RayActorError: The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: 6c45510684a01fe47160cf6801000000
+	pid: 518400
+	namespace: f521f703-f4c8-43b5-ab0e-cf6ef3bc7468
+	ip: 115.145.171.128
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code 2.
+
+[2024-08-13 02:34:51,111][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: 6c45510684a01fe47160cf6801000000
+	pid: 518400
+	namespace: f521f703-f4c8-43b5-ab0e-cf6ef3bc7468
+	ip: 115.145.171.128
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code 2.
+[2024-08-13 02:34:51,111][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: 6c45510684a01fe47160cf6801000000
+	pid: 518400
+	namespace: f521f703-f4c8-43b5-ab0e-cf6ef3bc7468
+	ip: 115.145.171.128
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code 2.
+[2024-08-13 02:34:51,112][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/app.py", line 339, in start_simulation
+    hist = run_fl(
+           ^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+                         ^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/server/server.py", line 93, in fit
+    self.parameters = self._get_initial_parameters(server_round=0, timeout=timeout)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/server/server.py", line 282, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 168, in get_parameters
+    message_out = self._submit_job(message, timeout)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 108, in _submit_job
+    raise ex
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    raise ex
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 866, in get_objects
+    raise value
+ray.exceptions.RayActorError: The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: 6c45510684a01fe47160cf6801000000
+	pid: 518400
+	namespace: f521f703-f4c8-43b5-ab0e-cf6ef3bc7468
+	ip: 115.145.171.128
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code 2.
+
+[2024-08-13 02:34:51,112][flwr][ERROR] - Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 2, 'num_gpus': 0.2} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 2, 'num_gpus': 0.2}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.

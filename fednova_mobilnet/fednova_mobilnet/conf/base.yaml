@@ -1,7 +1,4 @@
 ---
-defaults:
-  - _self_
-  - strategy: fedavg
 
 seed: 42
 num_clients: 50
@@ -9,13 +6,18 @@ fraction_train_clients: 0.1
 num_rounds: 100
 client_resources:
   num_cpus: 24
-  num_gpus: 0.125  # Fraction of clients per gpu
+  num_gpus: 0.5  # Fraction of clients per gpu
 
 config_fit:
   lr: 0.01
   momentum: 0.9
+  var_local_epochs: True
   local_epochs: 1
   local_batch_size: 32
+  seed: 123
+  var_min_epochs: 1
+  var_max_epochs: 5
+
 
 dataset:
   name: "albertvillanova/medmnist-v2"  # dataset name on Hugging Face [ "BahaaEldin0/NIH-Chest-Xray-14", BahaaEldin0/NIH-Chest-Xray-14-with-Augmentation, "hf-vision/chest-xray-pneumonia", "marmal88/skin_cancer", SilpaCS/Augmented_alzheimer]

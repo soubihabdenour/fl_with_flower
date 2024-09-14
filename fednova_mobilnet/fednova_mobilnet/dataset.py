@@ -1,6 +1,7 @@
 from flwr_datasets import FederatedDataset
 from pathlib import Path
 from flwr_datasets.partitioner import DirichletPartitioner, PathologicalPartitioner
+from fontTools.subset import subset
 from omegaconf import DictConfig
 from flwr_datasets.visualization import plot_label_distributions
 
@@ -36,17 +37,17 @@ def get_data(partitions_number: int, config: DictConfig, path):
 
     centralized_testset = fds.load_split("test")
 
-    fig2, ax, df = plot_label_distributions(
-        fds.partitioners["train"],
-        label_name="label",
-        plot_type="bar",
-        size_unit="absolute",
-        partition_id_axis="x",
-        legend=True,
-        verbose_labels=True,
-        title=None,
-        legend_kwargs={"ncols": 1, "bbox_to_anchor": (0.9, 0.66), }
-    )
-    path = Path(path) / f"{config.subset}_{config.partitioner.name}.pdf"
-    fig2.savefig(path, bbox_inches='tight')
+    # fig2, ax, df = plot_label_distributions(
+    #     fds.partitioners["train"],
+    #     label_name="label",
+    #     plot_type="bar",
+    #     size_unit="absolute",
+    #     partition_id_axis="x",
+    #     legend=True,
+    #     verbose_labels=True,
+    #     title=None,
+    #     legend_kwargs={"ncols": 1, "bbox_to_anchor": (0.9, 0.66), }
+    # )
+    # path = Path(path) / f"{config.subset}_{config.partitioner.name}.pdf"
+    # fig2.savefig(path, bbox_inches='tight')
     return fds, centralized_testset
