@@ -5,7 +5,7 @@ import numpy as np
 
 # Define your datasets, partitioners, and algorithms
 datasets = ['BloodMNIST']
-algorithms = ['fedavg']
+algorithms = ['fedavg', 'fednova']
 partitioners = {
     'iid_poisoned': ['poison_fraction0.8', 'poison_fraction0.8', 'poison_fraction0.8', 'poison_fraction0.8']
 }
