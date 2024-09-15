@@ -1,0 +1,19 @@
+seed: 42
+num_clients: 24
+num_rounds: 10
+client_resources:
+  num_cpus: 24
+  num_gpus: 0.2
+config_fit:
+  lr: 0.01
+  momentum: 0.9
+  local_epochs: 5
+dataset:
+  name: marmal88/skin_cancer
+  data_dir: ./data
+  partitioner:
+    name: PathologicalPartitioner
+    alpha: 1.0
+    num_classes_per_partition: 2
+model:
+  num_classes: 7

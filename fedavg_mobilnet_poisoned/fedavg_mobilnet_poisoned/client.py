@@ -80,7 +80,6 @@ def get_client_fn(dataset: FederatedDataset, num_classes, poison_fraction ,mal_i
     """
 
     def client_fn(context) -> fl.client.Client:
-        print("zbii======================================")
         """Construct a FlowerClient with its own dataset partition."""
         # Let's get the partition corresponding to the i-th client
         client_dataset = dataset.load_partition(

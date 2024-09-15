@@ -5,7 +5,7 @@ import numpy as np
 
 # Define your datasets, partitioners, and algorithms
 datasets = ['BloodMNIST', 'PathMNIST', 'TissueMNIST']
-algorithms = ['fedavg', 'fedavgm', 'fedprox', 'fedbn', 'fednova']
+algorithms = ['fedavg', 'fedavgm', 'fedprox', 'fednova']
 partitioners = {
     'drichlet': ['alpha0.9', 'alpha0.3', 'alpha0.1'],
     'pathological': ['classes07', 'classes04', 'classes02']
@@ -51,7 +51,7 @@ def create_figure(figure_title, partitioner_type):
 
                 if not data.empty:
                     # Extract the last 10 rounds (tail) and calculate the mean accuracy
-                    tail_data = data.tail(15)
+                    tail_data = data.tail(30)
                     mean_accuracy = tail_data['Accuracy'].mean()
                     std_dev = tail_data['Accuracy'].std()  # Standard deviation of the last 10 rounds
                     mean_accuracies.append(mean_accuracy)

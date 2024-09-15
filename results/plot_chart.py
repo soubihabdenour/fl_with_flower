@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Define your datasets, partitioners, and algorithms
 datasets = ['BloodMNIST', 'PathMNIST', 'TissueMNIST']
-algorithms = ['fedavg', 'fedavgm', 'fedprox', 'fedbn', 'fednova']
+algorithms = ['fedavg', 'fedavgm', 'fedprox', 'fednova']
 partitioners = {
     'drichlet': ['alpha0.9', 'alpha0.3', 'alpha0.1'],
     'pathological': ['classes07', 'classes04', 'classes02']

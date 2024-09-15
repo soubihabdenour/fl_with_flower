@@ -1,0 +1,910 @@
+[2024-08-15 07:08:24,926][flwr][INFO] - Starting Flower simulation, config: num_rounds=10, no round_timeout
+[2024-08-15 07:08:27,919][flwr][INFO] - Flower VCE: Ray initialized with resources: {'object_store_memory': 7635888537.0, 'node:__internal_head__': 1.0, 'CPU': 32.0, 'memory': 15271777076.0, 'node:115.145.171.128': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+[2024-08-15 07:08:27,920][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-08-15 07:08:27,920][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 24, 'num_gpus': 0.5}
+[2024-08-15 07:08:27,928][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+[2024-08-15 07:08:27,928][flwr][INFO] - [INIT]
+[2024-08-15 07:08:27,928][flwr][INFO] - Requesting initial parameters from one random client
+[2024-08-15 07:08:29,854][flwr][INFO] - Received initial parameters from one random client
+[2024-08-15 07:08:29,854][flwr][INFO] - Evaluating initial global parameters
+[2024-08-15 07:08:33,123][flwr][INFO] - initial parameters (loss, other metrics): 13.245084285736084, {'accuracy': 0.6266025641025641}
+[2024-08-15 07:08:33,123][flwr][INFO] - 
+[2024-08-15 07:08:33,123][flwr][INFO] - [ROUND 1]
+[2024-08-15 07:08:33,123][flwr][INFO] - configure_fit: strategy sampled 8 clients (out of 16)
+[2024-08-15 07:08:33,648][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+
+[2024-08-15 07:08:33,648][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+[2024-08-15 07:08:34,069][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+
+[2024-08-15 07:08:34,069][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+[2024-08-15 07:08:34,454][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+
+[2024-08-15 07:08:34,454][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+[2024-08-15 07:08:34,835][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+
+[2024-08-15 07:08:34,835][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+[2024-08-15 07:08:35,177][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+
+[2024-08-15 07:08:35,178][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+[2024-08-15 07:08:35,528][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+
+[2024-08-15 07:08:35,528][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+[2024-08-15 07:08:35,839][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+
+[2024-08-15 07:08:35,839][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+[2024-08-15 07:08:36,247][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+
+[2024-08-15 07:08:36,247][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/client.py", line 43, in fit
+    train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavg_mobilnet/utils.py", line 34, in train
+    loss = criterion(net(images), labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/torch/nn/functional.py", line 3053, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 0D or 1D target tensor expected, multi-target not supported
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=337268, ip=115.145.171.128, actor_id=7c488126044ee2b4ae17e9a601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f23f3158b10>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 0D or 1D target tensor expected, multi-target not supported
+[2024-08-15 07:08:36,248][flwr][INFO] - aggregate_fit: received 0 results and 8 failures
