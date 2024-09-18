@@ -9,7 +9,7 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchvision import models
 
-from fedavgm_mobilnet.utils import train, test, apply_transforms
+from fedavgm_vgg16.utils import train, test, apply_transforms
 
 
 # Define Flower Client

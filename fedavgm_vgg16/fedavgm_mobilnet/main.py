@@ -4,9 +4,9 @@ from hydra.core.hydra_config import HydraConfig
 from datasets import disable_progress_bar
 from omegaconf import DictConfig, OmegaConf
 import flwr as fl
-from fedavgm_mobilnet.dataset import get_data
-from fedavgm_mobilnet.server import get_on_fit_config, get_evaluate_fn
-from fedavgm_mobilnet.client import get_client_fn
+from fedavgm_vgg16.dataset import get_data
+from fedavgm_vgg16.server import get_on_fit_config, get_evaluate_fn
+from fedavgm_vgg16.client import get_client_fn
 from plot import smooth_plot
 
 @hydra.main(config_path='conf', config_name='base', version_base=None)

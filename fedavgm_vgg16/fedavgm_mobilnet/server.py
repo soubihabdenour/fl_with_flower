@@ -9,7 +9,7 @@ from flwr.common.typing import Scalar
 from datasets.utils.logging import disable_progress_bar
 from collections import OrderedDict
 from torch.utils.data import DataLoader
-from fedavgm_mobilnet.utils import test, apply_transforms
+from fedavgm_vgg16.utils import test, apply_transforms
 
 def get_on_fit_config(config: DictConfig):
     """Generate the function for config.
