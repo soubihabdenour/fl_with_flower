@@ -21,7 +21,11 @@ class FlowerClient(fl.client.NumPyClient):
         self.valset = valset
 
         self.model = models.vgg16(pretrained=True)
-        self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
+        #self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
+        # Replace the last fully connected layer
+        # VGG16's final classifier layer is at index 6
+        in_features = self.model.classifier[6].in_features
+        self.model.classifier[6] = nn.Linear(in_features, num_classes)
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = self.model.to(self.device)
