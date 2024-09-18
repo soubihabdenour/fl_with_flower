@@ -12,7 +12,7 @@ from flwr.common.typing import NDArrays
 from torch import nn
 from torch.optim.optimizer import Optimizer, required
 
-from fednova_mobilnet.utils import comp_accuracy
+from fednova_vgg16.utils import comp_accuracy
 
 
 class VGG(nn.Module):
