@@ -1,0 +1,2341 @@
+[2024-09-08 00:00:57,145][flwr][INFO] - Starting Flower simulation, config: num_rounds=100, no round_timeout
+[2024-09-08 00:01:03,125][flwr][INFO] - Flower VCE: Ray initialized with resources: {'CPU': 32.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'object_store_memory': 7591933132.0, 'node:__internal_head__': 1.0, 'node:115.145.171.128': 1.0, 'memory': 15183866267.0}
+[2024-09-08 00:01:03,126][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-09-08 00:01:03,126][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 24, 'num_gpus': 0.125}
+[2024-09-08 00:01:03,134][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+[2024-09-08 00:01:03,135][flwr][INFO] - [INIT]
+[2024-09-08 00:01:03,135][flwr][INFO] - Requesting initial parameters from one random client
+[2024-09-08 00:01:05,528][flwr][INFO] - Received initial parameters from one random client
+[2024-09-08 00:01:05,528][flwr][INFO] - Evaluating initial global parameters
+[2024-09-08 00:01:09,978][flwr][INFO] - initial parameters (loss, other metrics): 227.46140575408936, {'accuracy': 0.10114001753873136}
+[2024-09-08 00:01:09,978][flwr][INFO] - 
+[2024-09-08 00:01:09,978][flwr][INFO] - [ROUND 1]
+[2024-09-08 00:01:09,978][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:01:14,151][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:01:14,189][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-09-08 00:01:18,318][flwr][INFO] - fit progress: (1, 339.7825322151184, {'accuracy': 0.2753580824320374}, 8.340317323003546)
+[2024-09-08 00:01:18,318][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:01:18,585][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:01:18,585][flwr][WARNING] - No evaluate_metrics_aggregation_fn provided
+[2024-09-08 00:01:18,585][flwr][INFO] - 
+[2024-09-08 00:01:18,585][flwr][INFO] - [ROUND 2]
+[2024-09-08 00:01:18,585][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:01:22,130][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:01:26,247][flwr][INFO] - fit progress: (2, 527.1211197376251, {'accuracy': 0.16924875767319497}, 16.269124817001284)
+[2024-09-08 00:01:26,247][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:01:26,478][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:01:26,478][flwr][INFO] - 
+[2024-09-08 00:01:26,478][flwr][INFO] - [ROUND 3]
+[2024-09-08 00:01:26,479][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:01:30,598][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:01:34,750][flwr][INFO] - fit progress: (3, 201.64174103736877, {'accuracy': 0.35954399298450745}, 24.77174101601122)
+[2024-09-08 00:01:34,750][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:01:34,860][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:01:34,860][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:01:34,923][flwr][INFO] - aggregate_evaluate: received 1 results and 1 failures
+[2024-09-08 00:01:34,923][flwr][INFO] - 
+[2024-09-08 00:01:34,923][flwr][INFO] - [ROUND 4]
+[2024-09-08 00:01:34,923][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:01:39,639][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:01:43,978][flwr][INFO] - fit progress: (4, 433.6617317199707, {'accuracy': 0.47763811750950014}, 33.9998059230129)
+[2024-09-08 00:01:43,978][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:01:44,224][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:01:44,224][flwr][INFO] - 
+[2024-09-08 00:01:44,224][flwr][INFO] - [ROUND 5]
+[2024-09-08 00:01:44,224][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:01:49,501][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:01:53,837][flwr][INFO] - fit progress: (5, 209.5487414598465, {'accuracy': 0.38702133878982753}, 43.85919444001047)
+[2024-09-08 00:01:53,837][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:01:53,982][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:01:53,982][flwr][INFO] - 
+[2024-09-08 00:01:53,982][flwr][INFO] - [ROUND 6]
+[2024-09-08 00:01:53,982][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:01:55,958][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:02:00,130][flwr][INFO] - fit progress: (6, 378.15451836586, {'accuracy': 0.2578193510669395}, 50.15250471699983)
+[2024-09-08 00:02:00,130][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:02:00,338][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:02:00,338][flwr][INFO] - 
+[2024-09-08 00:02:00,338][flwr][INFO] - [ROUND 7]
+[2024-09-08 00:02:00,338][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:02:04,279][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:02:08,477][flwr][INFO] - fit progress: (7, 189.21798539161682, {'accuracy': 0.2630809704764689}, 58.49959602601302)
+[2024-09-08 00:02:08,478][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:02:08,650][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:02:08,650][flwr][INFO] - 
+[2024-09-08 00:02:08,650][flwr][INFO] - [ROUND 8]
+[2024-09-08 00:02:08,650][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:02:13,028][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:02:17,203][flwr][INFO] - fit progress: (8, 166.45853686332703, {'accuracy': 0.44548377667348726}, 67.22492230100033)
+[2024-09-08 00:02:17,203][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:02:17,464][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:02:17,464][flwr][INFO] - 
+[2024-09-08 00:02:17,464][flwr][INFO] - [ROUND 9]
+[2024-09-08 00:02:17,464][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:02:19,440][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:02:19,440][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:02:21,351][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:02:25,758][flwr][INFO] - fit progress: (9, 140.45485317707062, {'accuracy': 0.4866997953814674}, 75.77995205001207)
+[2024-09-08 00:02:25,758][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:02:25,894][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:02:25,894][flwr][INFO] - 
+[2024-09-08 00:02:25,894][flwr][INFO] - [ROUND 10]
+[2024-09-08 00:02:25,894][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:02:29,907][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:02:34,234][flwr][INFO] - fit progress: (10, 158.21714198589325, {'accuracy': 0.49985384390529086}, 84.25660218700068)
+[2024-09-08 00:02:34,235][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:02:34,471][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:02:34,471][flwr][INFO] - 
+[2024-09-08 00:02:34,471][flwr][INFO] - [ROUND 11]
+[2024-09-08 00:02:34,471][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:02:36,692][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:02:41,045][flwr][INFO] - fit progress: (11, 122.67416572570801, {'accuracy': 0.6036246711487869}, 91.06732022800134)
+[2024-09-08 00:02:41,045][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:02:41,246][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:02:41,247][flwr][INFO] - 
+[2024-09-08 00:02:41,247][flwr][INFO] - [ROUND 12]
+[2024-09-08 00:02:41,247][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:02:46,707][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:02:50,981][flwr][INFO] - fit progress: (12, 274.0147911310196, {'accuracy': 0.30838935983630517}, 101.00321667600656)
+[2024-09-08 00:02:50,981][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:02:51,218][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:02:51,218][flwr][INFO] - 
+[2024-09-08 00:02:51,218][flwr][INFO] - [ROUND 13]
+[2024-09-08 00:02:51,219][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:02:53,761][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:02:58,114][flwr][INFO] - fit progress: (13, 194.211470246315, {'accuracy': 0.23911137094416837}, 108.13611435001076)
+[2024-09-08 00:02:58,114][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:02:58,291][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:02:58,291][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:02:58,291][flwr][INFO] - aggregate_evaluate: received 1 results and 1 failures
+[2024-09-08 00:02:58,291][flwr][INFO] - 
+[2024-09-08 00:02:58,291][flwr][INFO] - [ROUND 14]
+[2024-09-08 00:02:58,292][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:03:02,152][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:03:06,462][flwr][INFO] - fit progress: (14, 204.34444427490234, {'accuracy': 0.3510669394913768}, 116.4842041110096)
+[2024-09-08 00:03:06,462][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:03:06,714][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:03:06,714][flwr][INFO] - 
+[2024-09-08 00:03:06,714][flwr][INFO] - [ROUND 15]
+[2024-09-08 00:03:06,714][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:03:11,643][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:03:15,949][flwr][INFO] - fit progress: (15, 129.56078612804413, {'accuracy': 0.5942706810874013}, 125.97144041700813)
+[2024-09-08 00:03:15,949][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:03:16,102][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:03:16,102][flwr][INFO] - 
+[2024-09-08 00:03:16,102][flwr][INFO] - [ROUND 16]
+[2024-09-08 00:03:16,102][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:03:22,562][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:03:26,710][flwr][INFO] - fit progress: (16, 153.61683946847916, {'accuracy': 0.5986553639286758}, 136.73245170801238)
+[2024-09-08 00:03:26,710][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:03:27,044][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:03:27,044][flwr][INFO] - 
+[2024-09-08 00:03:27,044][flwr][INFO] - [ROUND 17]
+[2024-09-08 00:03:27,044][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:03:29,541][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:03:33,743][flwr][INFO] - fit progress: (17, 143.38450425863266, {'accuracy': 0.5252850043846828}, 143.76560216001235)
+[2024-09-08 00:03:33,744][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:03:33,954][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:03:33,954][flwr][INFO] - 
+[2024-09-08 00:03:33,954][flwr][INFO] - [ROUND 18]
+[2024-09-08 00:03:33,954][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:03:37,748][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:03:41,916][flwr][INFO] - fit progress: (18, 132.8680093884468, {'accuracy': 0.49576147325343467}, 151.93815288601036)
+[2024-09-08 00:03:41,916][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:03:42,090][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:03:42,090][flwr][INFO] - 
+[2024-09-08 00:03:42,090][flwr][INFO] - [ROUND 19]
+[2024-09-08 00:03:42,090][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:03:48,150][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:03:52,312][flwr][INFO] - fit progress: (19, 148.14445251226425, {'accuracy': 0.4144986845951476}, 162.33425094700942)
+[2024-09-08 00:03:52,312][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:03:52,544][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:03:52,544][flwr][INFO] - 
+[2024-09-08 00:03:52,545][flwr][INFO] - [ROUND 20]
+[2024-09-08 00:03:52,545][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:03:55,525][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:03:59,725][flwr][INFO] - fit progress: (20, 121.42479544878006, {'accuracy': 0.4805612394036831}, 169.7469890150096)
+[2024-09-08 00:03:59,725][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:03:59,999][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:03:59,999][flwr][INFO] - 
+[2024-09-08 00:03:59,999][flwr][INFO] - [ROUND 21]
+[2024-09-08 00:04:00,000][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:04:03,384][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:04:07,576][flwr][INFO] - fit progress: (21, 202.2243191599846, {'accuracy': 0.4674071908798597}, 177.59830563700234)
+[2024-09-08 00:04:07,576][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:04:07,881][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:04:07,881][flwr][INFO] - 
+[2024-09-08 00:04:07,881][flwr][INFO] - [ROUND 22]
+[2024-09-08 00:04:07,881][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:04:12,764][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:04:16,952][flwr][INFO] - fit progress: (22, 172.97061145305634, {'accuracy': 0.3648056123940368}, 186.97427363099996)
+[2024-09-08 00:04:16,952][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:04:17,151][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:04:17,151][flwr][INFO] - 
+[2024-09-08 00:04:17,151][flwr][INFO] - [ROUND 23]
+[2024-09-08 00:04:17,151][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:04:23,895][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:04:28,053][flwr][INFO] - fit progress: (23, 106.26086556911469, {'accuracy': 0.6670564162525577}, 198.07567460701102)
+[2024-09-08 00:04:28,054][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:04:28,230][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:04:28,230][flwr][INFO] - 
+[2024-09-08 00:04:28,230][flwr][INFO] - [ROUND 24]
+[2024-09-08 00:04:28,230][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:04:32,529][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:04:36,687][flwr][INFO] - fit progress: (24, 197.1090189218521, {'accuracy': 0.2610347851505408}, 206.70903204999922)
+[2024-09-08 00:04:36,687][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:04:36,879][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:04:36,879][flwr][INFO] - 
+[2024-09-08 00:04:36,879][flwr][INFO] - [ROUND 25]
+[2024-09-08 00:04:36,880][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:04:37,660][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:04:37,661][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:04:39,929][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:04:44,087][flwr][INFO] - fit progress: (25, 135.79032963514328, {'accuracy': 0.5051154633148203}, 214.1093011010089)
+[2024-09-08 00:04:44,087][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:04:44,376][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:04:44,376][flwr][INFO] - 
+[2024-09-08 00:04:44,376][flwr][INFO] - [ROUND 26]
+[2024-09-08 00:04:44,376][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:04:48,875][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:04:53,036][flwr][INFO] - fit progress: (26, 141.61397117376328, {'accuracy': 0.597778427360421}, 223.0578041800036)
+[2024-09-08 00:04:53,036][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:04:53,188][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:04:53,188][flwr][INFO] - 
+[2024-09-08 00:04:53,188][flwr][INFO] - [ROUND 27]
+[2024-09-08 00:04:53,189][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:04:58,345][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:05:02,546][flwr][INFO] - fit progress: (27, 140.85005229711533, {'accuracy': 0.4586378251973107}, 232.56803291699907)
+[2024-09-08 00:05:02,546][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:05:02,762][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:05:02,762][flwr][INFO] - 
+[2024-09-08 00:05:02,763][flwr][INFO] - [ROUND 28]
+[2024-09-08 00:05:02,763][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:05:05,210][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:05:09,375][flwr][INFO] - fit progress: (28, 110.96153628826141, {'accuracy': 0.6959953230049694}, 239.39720562500588)
+[2024-09-08 00:05:09,375][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:05:09,511][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:05:09,512][flwr][INFO] - 
+[2024-09-08 00:05:09,512][flwr][INFO] - [ROUND 29]
+[2024-09-08 00:05:09,512][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:05:11,599][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:05:11,599][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:05:11,600][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:05:15,750][flwr][INFO] - fit progress: (29, 119.66399520635605, {'accuracy': 0.5457468576439638}, 245.77208345700637)
+[2024-09-08 00:05:15,750][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:05:15,913][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:05:15,913][flwr][INFO] - 
+[2024-09-08 00:05:15,913][flwr][INFO] - [ROUND 30]
+[2024-09-08 00:05:15,914][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:05:18,762][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:05:22,935][flwr][INFO] - fit progress: (30, 153.42288780212402, {'accuracy': 0.4370067231803566}, 252.9570797530032)
+[2024-09-08 00:05:22,935][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:05:23,121][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:05:23,121][flwr][INFO] - 
+[2024-09-08 00:05:23,121][flwr][INFO] - [ROUND 31]
+[2024-09-08 00:05:23,121][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:05:27,265][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:05:31,421][flwr][INFO] - fit progress: (31, 237.14463603496552, {'accuracy': 0.36422098801520025}, 261.44328295000014)
+[2024-09-08 00:05:31,421][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:05:31,822][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:05:31,822][flwr][INFO] - 
+[2024-09-08 00:05:31,822][flwr][INFO] - [ROUND 32]
+[2024-09-08 00:05:31,822][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:05:36,542][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:05:40,721][flwr][INFO] - fit progress: (32, 132.3694784939289, {'accuracy': 0.670271850336159}, 270.7429374560015)
+[2024-09-08 00:05:40,721][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:05:40,951][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:05:40,951][flwr][INFO] - 
+[2024-09-08 00:05:40,951][flwr][INFO] - [ROUND 33]
+[2024-09-08 00:05:40,951][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:05:43,151][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:05:47,296][flwr][INFO] - fit progress: (33, 140.7815581560135, {'accuracy': 0.6936568254896229}, 277.31853037301335)
+[2024-09-08 00:05:47,296][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:05:47,490][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:05:47,490][flwr][INFO] - 
+[2024-09-08 00:05:47,490][flwr][INFO] - [ROUND 34]
+[2024-09-08 00:05:47,491][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:05:49,139][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:05:53,301][flwr][INFO] - fit progress: (34, 218.46632170677185, {'accuracy': 0.43379128909675535}, 283.32330894500774)
+[2024-09-08 00:05:53,301][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:05:53,623][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:05:53,623][flwr][INFO] - 
+[2024-09-08 00:05:53,623][flwr][INFO] - [ROUND 35]
+[2024-09-08 00:05:53,623][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:05:55,431][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:05:59,814][flwr][INFO] - fit progress: (35, 180.530615568161, {'accuracy': 0.4104063139432914}, 289.83616847300436)
+[2024-09-08 00:05:59,814][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:06:00,010][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:06:00,010][flwr][INFO] - 
+[2024-09-08 00:06:00,010][flwr][INFO] - [ROUND 36]
+[2024-09-08 00:06:00,010][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:06:02,980][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:06:07,330][flwr][INFO] - fit progress: (36, 103.16228747367859, {'accuracy': 0.6617947968430283}, 297.35209510900313)
+[2024-09-08 00:06:07,330][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:06:07,490][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:06:07,490][flwr][INFO] - 
+[2024-09-08 00:06:07,490][flwr][INFO] - [ROUND 37]
+[2024-09-08 00:06:07,490][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:06:11,871][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:06:16,167][flwr][INFO] - fit progress: (37, 131.21471405029297, {'accuracy': 0.532300496930722}, 306.1887443920132)
+[2024-09-08 00:06:16,167][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:06:16,356][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:06:16,356][flwr][INFO] - 
+[2024-09-08 00:06:16,356][flwr][INFO] - [ROUND 38]
+[2024-09-08 00:06:16,356][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:06:22,903][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:06:27,213][flwr][INFO] - fit progress: (38, 91.48808267712593, {'accuracy': 0.7781350482315113}, 317.23482437500206)
+[2024-09-08 00:06:27,213][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:06:27,489][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:06:27,489][flwr][INFO] - 
+[2024-09-08 00:06:27,490][flwr][INFO] - [ROUND 39]
+[2024-09-08 00:06:27,490][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:06:32,631][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:06:37,023][flwr][INFO] - fit progress: (39, 114.34519851207733, {'accuracy': 0.6723180356620871}, 327.04564288099937)
+[2024-09-08 00:06:37,024][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:06:37,265][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:06:37,265][flwr][INFO] - 
+[2024-09-08 00:06:37,265][flwr][INFO] - [ROUND 40]
+[2024-09-08 00:06:37,265][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:06:37,280][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:06:37,280][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:06:42,179][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:06:46,527][flwr][INFO] - fit progress: (40, 131.0564860701561, {'accuracy': 0.6080093539900614}, 336.54879118500685)
+[2024-09-08 00:06:46,527][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:06:46,752][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:06:46,752][flwr][INFO] - 
+[2024-09-08 00:06:46,752][flwr][INFO] - [ROUND 41]
+[2024-09-08 00:06:46,753][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:06:47,903][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:06:47,904][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:06:51,568][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:06:55,896][flwr][INFO] - fit progress: (41, 89.11068245768547, {'accuracy': 0.6921952645425314}, 345.9178731830034)
+[2024-09-08 00:06:55,896][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:06:56,100][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:06:56,100][flwr][INFO] - 
+[2024-09-08 00:06:56,100][flwr][INFO] - [ROUND 42]
+[2024-09-08 00:06:56,101][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:06:59,849][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:07:04,185][flwr][INFO] - fit progress: (42, 192.40615034103394, {'accuracy': 0.278865828705057}, 354.20759771000303)
+[2024-09-08 00:07:04,186][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:07:04,439][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:07:04,439][flwr][INFO] - 
+[2024-09-08 00:07:04,439][flwr][INFO] - [ROUND 43]
+[2024-09-08 00:07:04,439][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:07:04,453][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:07:04,453][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:07:06,501][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:07:10,824][flwr][INFO] - fit progress: (43, 247.37254440784454, {'accuracy': 0.44343759134755917}, 360.84620913901017)
+[2024-09-08 00:07:10,824][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:07:11,071][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:07:11,071][flwr][INFO] - 
+[2024-09-08 00:07:11,071][flwr][INFO] - [ROUND 44]
+[2024-09-08 00:07:11,071][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:07:13,879][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:07:18,237][flwr][INFO] - fit progress: (44, 167.1518111228943, {'accuracy': 0.5399006138555977}, 368.2588414130005)
+[2024-09-08 00:07:18,237][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:07:18,547][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:07:18,547][flwr][INFO] - 
+[2024-09-08 00:07:18,547][flwr][INFO] - [ROUND 45]
+[2024-09-08 00:07:18,547][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:07:20,561][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:07:24,890][flwr][INFO] - fit progress: (45, 101.31450301408768, {'accuracy': 0.7243496053785443}, 374.91258067100716)
+[2024-09-08 00:07:24,891][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:07:25,115][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:07:25,115][flwr][INFO] - 
+[2024-09-08 00:07:25,115][flwr][INFO] - [ROUND 46]
+[2024-09-08 00:07:25,115][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:07:28,329][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:07:32,660][flwr][INFO] - fit progress: (46, 113.53903687000275, {'accuracy': 0.6454253142356037}, 382.68231655099953)
+[2024-09-08 00:07:32,660][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:07:32,859][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:07:32,859][flwr][INFO] - 
+[2024-09-08 00:07:32,859][flwr][INFO] - [ROUND 47]
+[2024-09-08 00:07:32,859][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:07:37,346][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:07:41,788][flwr][INFO] - fit progress: (47, 175.5532830953598, {'accuracy': 0.4405144694533762}, 391.8097539030132)
+[2024-09-08 00:07:41,788][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:07:41,931][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:07:41,931][flwr][INFO] - 
+[2024-09-08 00:07:41,931][flwr][INFO] - [ROUND 48]
+[2024-09-08 00:07:41,931][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:07:44,257][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:07:48,575][flwr][INFO] - fit progress: (48, 104.50512528419495, {'accuracy': 0.6734872844197604}, 398.5973757669999)
+[2024-09-08 00:07:48,575][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:07:48,749][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:07:48,749][flwr][INFO] - 
+[2024-09-08 00:07:48,749][flwr][INFO] - [ROUND 49]
+[2024-09-08 00:07:48,750][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:07:54,212][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:07:58,540][flwr][INFO] - fit progress: (49, 101.060756534338, {'accuracy': 0.6407483192049108}, 408.562356156006)
+[2024-09-08 00:07:58,540][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:07:58,741][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:07:58,741][flwr][INFO] - 
+[2024-09-08 00:07:58,741][flwr][INFO] - [ROUND 50]
+[2024-09-08 00:07:58,742][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:08:03,412][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:08:07,769][flwr][INFO] - fit progress: (50, 183.8050892353058, {'accuracy': 0.5255773165741011}, 417.7915127990127)
+[2024-09-08 00:08:07,770][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:08:07,788][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:08:07,788][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:08:07,860][flwr][INFO] - aggregate_evaluate: received 1 results and 1 failures
+[2024-09-08 00:08:07,860][flwr][INFO] - 
+[2024-09-08 00:08:07,860][flwr][INFO] - [ROUND 51]
+[2024-09-08 00:08:07,860][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:08:11,681][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:08:16,006][flwr][INFO] - fit progress: (51, 136.49598228931427, {'accuracy': 0.5530546623794212}, 426.02810824000335)
+[2024-09-08 00:08:16,006][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:08:16,219][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:08:16,219][flwr][INFO] - 
+[2024-09-08 00:08:16,219][flwr][INFO] - [ROUND 52]
+[2024-09-08 00:08:16,219][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:08:18,739][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:08:18,739][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:08:20,404][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:08:24,701][flwr][INFO] - fit progress: (52, 113.79459783434868, {'accuracy': 0.6389944460684011}, 434.7227661020006)
+[2024-09-08 00:08:24,701][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:08:24,870][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:08:24,870][flwr][INFO] - 
+[2024-09-08 00:08:24,870][flwr][INFO] - [ROUND 53]
+[2024-09-08 00:08:24,870][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:08:28,337][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:08:32,669][flwr][INFO] - fit progress: (53, 124.05847138166428, {'accuracy': 0.5869628763519439}, 442.69150931701006)
+[2024-09-08 00:08:32,669][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:08:32,845][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:08:32,845][flwr][INFO] - 
+[2024-09-08 00:08:32,845][flwr][INFO] - [ROUND 54]
+[2024-09-08 00:08:32,845][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:08:39,053][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:08:43,410][flwr][INFO] - fit progress: (54, 68.74446591734886, {'accuracy': 0.754457760888629}, 453.4321296870039)
+[2024-09-08 00:08:43,410][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:08:43,687][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:08:43,687][flwr][INFO] - 
+[2024-09-08 00:08:43,687][flwr][INFO] - [ROUND 55]
+[2024-09-08 00:08:43,687][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:08:48,103][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:08:52,426][flwr][INFO] - fit progress: (55, 79.61313605308533, {'accuracy': 0.7249342297573809}, 462.44856357900426)
+[2024-09-08 00:08:52,427][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:08:52,648][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:08:52,648][flwr][INFO] - 
+[2024-09-08 00:08:52,648][flwr][INFO] - [ROUND 56]
+[2024-09-08 00:08:52,648][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:08:54,065][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:08:54,066][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:08:56,519][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:09:00,854][flwr][INFO] - fit progress: (56, 62.653167843818665, {'accuracy': 0.7912890967553347}, 470.8758095820085)
+[2024-09-08 00:09:00,854][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:09:01,021][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:09:01,021][flwr][INFO] - 
+[2024-09-08 00:09:01,021][flwr][INFO] - [ROUND 57]
+[2024-09-08 00:09:01,021][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:09:05,083][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:09:09,405][flwr][INFO] - fit progress: (57, 196.96217811107635, {'accuracy': 0.5168079508915522}, 479.42753818200435)
+[2024-09-08 00:09:09,406][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:09:09,565][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:09:09,565][flwr][INFO] - 
+[2024-09-08 00:09:09,565][flwr][INFO] - [ROUND 58]
+[2024-09-08 00:09:09,565][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:09:09,688][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:09:09,688][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:09:12,733][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:09:17,049][flwr][INFO] - fit progress: (58, 131.17901587486267, {'accuracy': 0.737795966091786}, 487.0711865570047)
+[2024-09-08 00:09:17,049][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:09:17,204][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:09:17,204][flwr][INFO] - 
+[2024-09-08 00:09:17,204][flwr][INFO] - [ROUND 59]
+[2024-09-08 00:09:17,204][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:09:18,853][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:09:23,140][flwr][INFO] - fit progress: (59, 202.67579978704453, {'accuracy': 0.47500730780473543}, 493.1625624270091)
+[2024-09-08 00:09:23,141][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:09:23,340][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:09:23,340][flwr][INFO] - 
+[2024-09-08 00:09:23,340][flwr][INFO] - [ROUND 60]
+[2024-09-08 00:09:23,340][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:09:27,653][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:09:31,988][flwr][INFO] - fit progress: (60, 65.05602818727493, {'accuracy': 0.8021046477638117}, 502.0097511130007)
+[2024-09-08 00:09:31,988][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:09:32,218][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:09:32,218][flwr][INFO] - 
+[2024-09-08 00:09:32,218][flwr][INFO] - [ROUND 61]
+[2024-09-08 00:09:32,218][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:09:34,738][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:09:39,095][flwr][INFO] - fit progress: (61, 121.11498793959618, {'accuracy': 0.6501023092662964}, 509.11681773900636)
+[2024-09-08 00:09:39,095][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:09:39,241][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:09:39,241][flwr][INFO] - 
+[2024-09-08 00:09:39,241][flwr][INFO] - [ROUND 62]
+[2024-09-08 00:09:39,241][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:09:39,664][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:09:39,664][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:09:40,248][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:09:44,573][flwr][INFO] - fit progress: (62, 188.61211770772934, {'accuracy': 0.4533762057877814}, 514.5953148620029)
+[2024-09-08 00:09:44,573][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:09:44,789][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:09:44,826][flwr][INFO] - 
+[2024-09-08 00:09:44,826][flwr][INFO] - [ROUND 63]
+[2024-09-08 00:09:44,826][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:09:50,548][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:09:54,864][flwr][INFO] - fit progress: (63, 91.35497537255287, {'accuracy': 0.687810581701257}, 524.8863143630006)
+[2024-09-08 00:09:54,864][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:09:55,138][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:09:55,138][flwr][INFO] - 
+[2024-09-08 00:09:55,138][flwr][INFO] - [ROUND 64]
+[2024-09-08 00:09:55,138][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:10:00,646][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:10:04,968][flwr][INFO] - fit progress: (64, 133.0044685602188, {'accuracy': 0.6805027769657995}, 534.9899608010019)
+[2024-09-08 00:10:04,968][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:10:05,191][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:10:05,191][flwr][INFO] - 
+[2024-09-08 00:10:05,191][flwr][INFO] - [ROUND 65]
+[2024-09-08 00:10:05,191][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:10:09,886][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:10:14,231][flwr][INFO] - fit progress: (65, 376.3466467857361, {'accuracy': 0.35954399298450745}, 544.2532958540105)
+[2024-09-08 00:10:14,231][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:10:14,384][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:10:14,384][flwr][INFO] - 
+[2024-09-08 00:10:14,384][flwr][INFO] - [ROUND 66]
+[2024-09-08 00:10:14,384][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:10:17,920][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:10:22,261][flwr][INFO] - fit progress: (66, 157.87459337711334, {'accuracy': 0.6074247296112247}, 552.2831012120005)
+[2024-09-08 00:10:22,261][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:10:22,479][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:10:22,479][flwr][INFO] - 
+[2024-09-08 00:10:22,479][flwr][INFO] - [ROUND 67]
+[2024-09-08 00:10:22,479][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:10:25,781][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:10:30,115][flwr][INFO] - fit progress: (67, 115.06981393694878, {'accuracy': 0.642794504530839}, 560.137170676011)
+[2024-09-08 00:10:30,115][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:10:30,361][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:10:30,361][flwr][INFO] - 
+[2024-09-08 00:10:30,361][flwr][INFO] - [ROUND 68]
+[2024-09-08 00:10:30,361][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:10:34,508][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:10:38,804][flwr][INFO] - fit progress: (68, 97.90419200062752, {'accuracy': 0.665302543116048}, 568.8261849900009)
+[2024-09-08 00:10:38,804][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:10:39,080][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:10:39,080][flwr][INFO] - 
+[2024-09-08 00:10:39,080][flwr][INFO] - [ROUND 69]
+[2024-09-08 00:10:39,080][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:10:40,824][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:10:40,824][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:10:42,440][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:10:46,782][flwr][INFO] - fit progress: (69, 110.3137341439724, {'accuracy': 0.7179187372113417}, 576.8040976230113)
+[2024-09-08 00:10:46,782][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:10:46,936][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:10:46,936][flwr][INFO] - 
+[2024-09-08 00:10:46,936][flwr][INFO] - [ROUND 70]
+[2024-09-08 00:10:46,936][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:10:49,931][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:10:54,274][flwr][INFO] - fit progress: (70, 74.97883102297783, {'accuracy': 0.7547500730780473}, 584.2959596860019)
+[2024-09-08 00:10:54,274][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:10:54,500][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:10:54,501][flwr][INFO] - 
+[2024-09-08 00:10:54,501][flwr][INFO] - [ROUND 71]
+[2024-09-08 00:10:54,501][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:10:58,922][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:11:03,203][flwr][INFO] - fit progress: (71, 134.9704020023346, {'accuracy': 0.572347266881029}, 593.2256264280004)
+[2024-09-08 00:11:03,204][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:11:03,347][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:11:03,347][flwr][INFO] - 
+[2024-09-08 00:11:03,347][flwr][INFO] - [ROUND 72]
+[2024-09-08 00:11:03,347][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:11:07,522][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:11:11,863][flwr][INFO] - fit progress: (72, 129.62234935164452, {'accuracy': 0.6758257819351067}, 601.8851679210056)
+[2024-09-08 00:11:11,863][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:11:12,083][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:11:12,083][flwr][INFO] - 
+[2024-09-08 00:11:12,083][flwr][INFO] - [ROUND 73]
+[2024-09-08 00:11:12,083][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:11:15,939][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:11:20,247][flwr][INFO] - fit progress: (73, 91.5139736533165, {'accuracy': 0.6962876351943876}, 610.2687607000116)
+[2024-09-08 00:11:20,247][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:11:20,457][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:11:20,457][flwr][INFO] - 
+[2024-09-08 00:11:20,457][flwr][INFO] - [ROUND 74]
+[2024-09-08 00:11:20,457][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:11:24,038][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:11:28,388][flwr][INFO] - fit progress: (74, 96.01363289356232, {'accuracy': 0.6767027185033616}, 618.410146618)
+[2024-09-08 00:11:28,388][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:11:28,609][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:11:28,610][flwr][INFO] - 
+[2024-09-08 00:11:28,610][flwr][INFO] - [ROUND 75]
+[2024-09-08 00:11:28,610][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:11:33,117][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:11:37,431][flwr][INFO] - fit progress: (75, 81.18087247014046, {'accuracy': 0.7556270096463023}, 627.4536170620122)
+[2024-09-08 00:11:37,432][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:11:37,571][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:11:37,571][flwr][INFO] - 
+[2024-09-08 00:11:37,571][flwr][INFO] - [ROUND 76]
+[2024-09-08 00:11:37,571][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:11:41,250][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:11:45,593][flwr][INFO] - fit progress: (76, 103.18807968497276, {'accuracy': 0.6901490792166033}, 635.6155524800124)
+[2024-09-08 00:11:45,594][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:11:45,745][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:11:45,746][flwr][INFO] - 
+[2024-09-08 00:11:45,746][flwr][INFO] - [ROUND 77]
+[2024-09-08 00:11:45,746][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:11:49,681][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:11:54,006][flwr][INFO] - fit progress: (77, 69.41417783498764, {'accuracy': 0.763227126571178}, 644.0277219380077)
+[2024-09-08 00:11:54,006][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:11:54,160][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:11:54,160][flwr][INFO] - 
+[2024-09-08 00:11:54,160][flwr][INFO] - [ROUND 78]
+[2024-09-08 00:11:54,160][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:11:58,743][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:12:03,094][flwr][INFO] - fit progress: (78, 82.66316598653793, {'accuracy': 0.6992107570885706}, 653.1164173300058)
+[2024-09-08 00:12:03,094][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:12:03,395][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:12:03,395][flwr][INFO] - 
+[2024-09-08 00:12:03,395][flwr][INFO] - [ROUND 79]
+[2024-09-08 00:12:03,395][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:12:03,822][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+[2024-09-08 00:12:03,822][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/PycharmProjects/fl_with_flower/fedavgm_mobilnet/fedavgm_mobilnet/client.py", line 87, in client_fn
+    client_dataset_splits = client_dataset.train_test_split(test_size=0.1, seed=42)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 567, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/fingerprint.py", line 482, in wrapper
+    out = func(dataset, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/datasets/arrow_dataset.py", line 4587, in train_test_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=93856, ip=115.145.171.128, actor_id=22b98a0f170f6e2cced9f7d001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7c86faa06bd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/abdenour/miniconda3/envs/fl_with_flower/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: With n_samples=1, test_size=0.1 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+[2024-09-08 00:12:04,974][flwr][INFO] - aggregate_fit: received 4 results and 1 failures
+[2024-09-08 00:12:09,300][flwr][INFO] - fit progress: (79, 81.66221505403519, {'accuracy': 0.7255188541362175}, 659.3221183770074)
+[2024-09-08 00:12:09,300][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:12:09,445][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:12:09,446][flwr][INFO] - 
+[2024-09-08 00:12:09,446][flwr][INFO] - [ROUND 80]
+[2024-09-08 00:12:09,446][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:12:14,275][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:12:18,557][flwr][INFO] - fit progress: (80, 70.45254300534725, {'accuracy': 0.7477345805320081}, 668.5793185260118)
+[2024-09-08 00:12:18,557][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:12:18,759][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:12:18,759][flwr][INFO] - 
+[2024-09-08 00:12:18,759][flwr][INFO] - [ROUND 81]
+[2024-09-08 00:12:18,759][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:12:22,377][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:12:26,728][flwr][INFO] - fit progress: (81, 119.06382429599762, {'accuracy': 0.6261327097339959}, 676.7501982510003)
+[2024-09-08 00:12:26,728][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:12:26,891][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:12:26,891][flwr][INFO] - 
+[2024-09-08 00:12:26,891][flwr][INFO] - [ROUND 82]
+[2024-09-08 00:12:26,891][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:12:29,728][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:12:34,043][flwr][INFO] - fit progress: (82, 130.21526116132736, {'accuracy': 0.5682548962291728}, 684.0650916779996)
+[2024-09-08 00:12:34,043][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:12:34,274][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:12:34,274][flwr][INFO] - 
+[2024-09-08 00:12:34,274][flwr][INFO] - [ROUND 83]
+[2024-09-08 00:12:34,274][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:12:38,980][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:12:43,314][flwr][INFO] - fit progress: (83, 71.30772262811661, {'accuracy': 0.7635194387605964}, 693.3357440290129)
+[2024-09-08 00:12:43,314][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:12:43,459][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:12:43,460][flwr][INFO] - 
+[2024-09-08 00:12:43,460][flwr][INFO] - [ROUND 84]
+[2024-09-08 00:12:43,460][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:12:47,034][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:12:51,386][flwr][INFO] - fit progress: (84, 229.87983453273773, {'accuracy': 0.518561824028062}, 701.4078570040001)
+[2024-09-08 00:12:51,386][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:12:51,544][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:12:51,544][flwr][INFO] - 
+[2024-09-08 00:12:51,544][flwr][INFO] - [ROUND 85]
+[2024-09-08 00:12:51,544][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:12:54,242][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:12:58,446][flwr][INFO] - fit progress: (85, 111.95442169904709, {'accuracy': 0.642794504530839}, 708.4680132130015)
+[2024-09-08 00:12:58,446][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:12:58,601][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:12:58,601][flwr][INFO] - 
+[2024-09-08 00:12:58,601][flwr][INFO] - [ROUND 86]
+[2024-09-08 00:12:58,601][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:13:01,494][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:13:05,663][flwr][INFO] - fit progress: (86, 110.05683419108391, {'accuracy': 0.6828412744811458}, 715.685519000006)
+[2024-09-08 00:13:05,664][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:13:05,918][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:13:05,918][flwr][INFO] - 
+[2024-09-08 00:13:05,918][flwr][INFO] - [ROUND 87]
+[2024-09-08 00:13:05,918][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:13:11,634][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:13:15,791][flwr][INFO] - fit progress: (87, 119.41466444730759, {'accuracy': 0.7138263665594855}, 725.8132172590122)
+[2024-09-08 00:13:15,791][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:13:15,953][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:13:15,953][flwr][INFO] - 
+[2024-09-08 00:13:15,953][flwr][INFO] - [ROUND 88]
+[2024-09-08 00:13:15,953][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:13:21,808][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:13:25,966][flwr][INFO] - fit progress: (88, 77.06612667441368, {'accuracy': 0.797427652733119}, 735.988255815013)
+[2024-09-08 00:13:25,966][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:13:26,110][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:13:26,110][flwr][INFO] - 
+[2024-09-08 00:13:26,110][flwr][INFO] - [ROUND 89]
+[2024-09-08 00:13:26,110][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:13:28,837][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:13:33,021][flwr][INFO] - fit progress: (89, 112.72869235277176, {'accuracy': 0.6840105232388191}, 743.0430546270072)
+[2024-09-08 00:13:33,021][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:13:33,313][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:13:33,313][flwr][INFO] - 
+[2024-09-08 00:13:33,313][flwr][INFO] - [ROUND 90]
+[2024-09-08 00:13:33,313][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:13:38,839][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:13:43,025][flwr][INFO] - fit progress: (90, 137.44334656000137, {'accuracy': 0.6322712657117802}, 753.0474158190045)
+[2024-09-08 00:13:43,025][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:13:43,195][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:13:43,196][flwr][INFO] - 
+[2024-09-08 00:13:43,196][flwr][INFO] - [ROUND 91]
+[2024-09-08 00:13:43,196][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:13:46,716][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:13:50,889][flwr][INFO] - fit progress: (91, 120.86505365371704, {'accuracy': 0.6141479099678456}, 760.9116851230065)
+[2024-09-08 00:13:50,890][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:13:51,063][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:13:51,063][flwr][INFO] - 
+[2024-09-08 00:13:51,063][flwr][INFO] - [ROUND 92]
+[2024-09-08 00:13:51,064][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:13:53,868][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:13:58,006][flwr][INFO] - fit progress: (92, 80.7532787322998, {'accuracy': 0.7158725518854137}, 768.0282572810102)
+[2024-09-08 00:13:58,006][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:13:58,164][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:13:58,164][flwr][INFO] - 
+[2024-09-08 00:13:58,164][flwr][INFO] - [ROUND 93]
+[2024-09-08 00:13:58,164][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:14:01,155][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:14:05,330][flwr][INFO] - fit progress: (93, 138.08818936347961, {'accuracy': 0.5457468576439638}, 775.3517891110096)
+[2024-09-08 00:14:05,330][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:14:05,521][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:14:05,521][flwr][INFO] - 
+[2024-09-08 00:14:05,521][flwr][INFO] - [ROUND 94]
+[2024-09-08 00:14:05,521][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:14:08,696][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:14:12,851][flwr][INFO] - fit progress: (94, 72.32260593771935, {'accuracy': 0.7486115171002631}, 782.8731203230127)
+[2024-09-08 00:14:12,851][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:14:13,053][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:14:13,053][flwr][INFO] - 
+[2024-09-08 00:14:13,053][flwr][INFO] - [ROUND 95]
+[2024-09-08 00:14:13,053][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:14:18,811][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:14:22,966][flwr][INFO] - fit progress: (95, 69.03594282269478, {'accuracy': 0.7538731365097925}, 792.9879285380011)
+[2024-09-08 00:14:22,966][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:14:23,193][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:14:23,193][flwr][INFO] - 
+[2024-09-08 00:14:23,193][flwr][INFO] - [ROUND 96]
+[2024-09-08 00:14:23,193][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:14:25,727][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:14:29,903][flwr][INFO] - fit progress: (96, 124.24560424685478, {'accuracy': 0.6305173925752704}, 799.9247858760064)
+[2024-09-08 00:14:29,903][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:14:30,116][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:14:30,116][flwr][INFO] - 
+[2024-09-08 00:14:30,116][flwr][INFO] - [ROUND 97]
+[2024-09-08 00:14:30,117][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:14:33,954][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:14:38,110][flwr][INFO] - fit progress: (97, 69.58178141713142, {'accuracy': 0.7845659163987139}, 808.1323946900084)
+[2024-09-08 00:14:38,110][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:14:38,294][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:14:38,294][flwr][INFO] - 
+[2024-09-08 00:14:38,294][flwr][INFO] - [ROUND 98]
+[2024-09-08 00:14:38,295][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:14:41,876][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:14:46,065][flwr][INFO] - fit progress: (98, 45.79142136871815, {'accuracy': 0.8535515931014324}, 816.0872697830055)
+[2024-09-08 00:14:46,065][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:14:46,223][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:14:46,223][flwr][INFO] - 
+[2024-09-08 00:14:46,223][flwr][INFO] - [ROUND 99]
+[2024-09-08 00:14:46,223][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:14:48,999][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:14:53,170][flwr][INFO] - fit progress: (99, 111.6274031996727, {'accuracy': 0.6465945629932768}, 823.192679898013)
+[2024-09-08 00:14:53,171][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:14:53,439][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:14:53,439][flwr][INFO] - 
+[2024-09-08 00:14:53,439][flwr][INFO] - [ROUND 100]
+[2024-09-08 00:14:53,439][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-09-08 00:14:59,542][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-09-08 00:15:03,877][flwr][INFO] - fit progress: (100, 71.90804445743561, {'accuracy': 0.7623501900029231}, 833.8989748120075)
+[2024-09-08 00:15:03,877][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-09-08 00:15:04,095][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-09-08 00:15:04,095][flwr][INFO] - 
+[2024-09-08 00:15:04,096][flwr][INFO] - [SUMMARY]
+[2024-09-08 00:15:04,096][flwr][INFO] - Run finished 100 round(s) in 834.12s
+[2024-09-08 00:15:04,096][flwr][INFO] - 	History (loss, distributed):
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 1: 1.6818195700645446
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 2: 4.78163616997855
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 3: 0.5939599275588989
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 4: 6.97001775837055
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 5: 2.159697914123535
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 6: 6.403766305823075
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 7: 1.4495142102241516
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 8: 1.91889173189799
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 9: 1.7445813179016114
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 10: 1.7880212366580963
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 11: 1.6254223585128784
+[2024-09-08 00:15:04,096][flwr][INFO] - 		round 12: 3.4777449452599813
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 13: 1.8718641996383667
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 14: 0.5988300116732717
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 15: 1.0059162378311157
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 16: 0.8442234178384145
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 17: 0.7255523256633593
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 18: 2.2283404554639543
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 19: 0.43617097450339276
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 20: 0.7584824857023573
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 21: 1.0315036751875064
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 22: 2.112401463243426
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 23: 1.5817743142445881
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 24: 2.377100149367718
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 25: 0.8986583972169507
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 26: 1.6796790659427643
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 27: 1.1153783593326807
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 28: 0.5721695005893708
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 29: 1.1571416304661677
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 30: 1.7575192562369413
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 31: 3.348698348563335
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 32: 1.1926348601302055
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 33: 0.5475166247171515
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 34: 2.1861545698983327
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 35: 1.8868549752235413
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 36: 0.7991279752358146
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 37: 1.549288547316263
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 38: 1.1706450626031677
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 39: 0.36356890019847127
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 40: 0.9122354090213776
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 41: 1.5139124393463135
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 42: 2.26433933046129
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 43: 0.5900283753871918
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 44: 0.6847466553250948
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 45: 0.8428955353907684
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 46: 0.45296473885482214
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 47: 1.2463342276486484
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 48: 0.711180609815261
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 49: 0.15946772357202926
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 50: 0.4079737961292267
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 51: 0.5809204876422882
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 52: 1.296580120921135
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 53: 2.119719558291965
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 54: 0.8322178394393995
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 55: 1.0875191368273835
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 56: 1.318643384966357
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 57: 1.8738664129505986
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 58: 0.9671445081108495
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 59: 2.520093432012594
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 60: 0.6225001097602003
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 61: 0.25043465495109557
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 62: 3.8741376059395924
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 63: 1.4861491151375346
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 64: 0.93716403717796
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 65: 5.823177950185102
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 66: 2.3675984465886675
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 67: 1.023656687595778
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 68: 0.8060393342200447
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 69: 0.4204067932931997
+[2024-09-08 00:15:04,097][flwr][INFO] - 		round 70: 0.8657864980530321
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 71: 1.1677384051409634
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 72: 1.510114326405881
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 73: 0.8105076288772841
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 74: 0.6313245623342453
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 75: 0.7561558794841403
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 76: 0.9458866392572721
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 77: 0.822857209614345
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 78: 0.454627692202727
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 79: 0.3903275430202484
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 80: 0.1293691798763455
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 81: 1.1012401315901015
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 82: 2.465224786716349
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 83: 0.03877207289703868
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 84: 0.8773530572652817
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 85: 0.8573353067040443
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 86: 0.5834841746836901
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 87: 1.4690121078491212
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 88: 0.38404456697977507
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 89: 0.5457206156391364
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 90: 2.122731866507695
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 91: 2.317415039879935
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 92: 0.7572326560815176
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 93: 1.2179668843746185
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 94: 0.08080257058071975
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 95: 0.20395198836922646
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 96: 0.9903525431309977
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 97: 0.6827462904336976
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 98: 0.16857258740224337
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 99: 1.1600284392071754
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 100: 1.8637236723533044
+[2024-09-08 00:15:04,098][flwr][INFO] - 	History (loss, centralized):
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 0: 227.46140575408936
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 1: 339.7825322151184
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 2: 527.1211197376251
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 3: 201.64174103736877
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 4: 433.6617317199707
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 5: 209.5487414598465
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 6: 378.15451836586
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 7: 189.21798539161682
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 8: 166.45853686332703
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 9: 140.45485317707062
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 10: 158.21714198589325
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 11: 122.67416572570801
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 12: 274.0147911310196
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 13: 194.211470246315
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 14: 204.34444427490234
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 15: 129.56078612804413
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 16: 153.61683946847916
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 17: 143.38450425863266
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 18: 132.8680093884468
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 19: 148.14445251226425
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 20: 121.42479544878006
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 21: 202.2243191599846
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 22: 172.97061145305634
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 23: 106.26086556911469
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 24: 197.1090189218521
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 25: 135.79032963514328
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 26: 141.61397117376328
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 27: 140.85005229711533
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 28: 110.96153628826141
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 29: 119.66399520635605
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 30: 153.42288780212402
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 31: 237.14463603496552
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 32: 132.3694784939289
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 33: 140.7815581560135
+[2024-09-08 00:15:04,098][flwr][INFO] - 		round 34: 218.46632170677185
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 35: 180.530615568161
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 36: 103.16228747367859
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 37: 131.21471405029297
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 38: 91.48808267712593
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 39: 114.34519851207733
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 40: 131.0564860701561
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 41: 89.11068245768547
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 42: 192.40615034103394
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 43: 247.37254440784454
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 44: 167.1518111228943
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 45: 101.31450301408768
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 46: 113.53903687000275
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 47: 175.5532830953598
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 48: 104.50512528419495
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 49: 101.060756534338
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 50: 183.8050892353058
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 51: 136.49598228931427
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 52: 113.79459783434868
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 53: 124.05847138166428
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 54: 68.74446591734886
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 55: 79.61313605308533
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 56: 62.653167843818665
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 57: 196.96217811107635
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 58: 131.17901587486267
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 59: 202.67579978704453
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 60: 65.05602818727493
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 61: 121.11498793959618
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 62: 188.61211770772934
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 63: 91.35497537255287
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 64: 133.0044685602188
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 65: 376.3466467857361
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 66: 157.87459337711334
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 67: 115.06981393694878
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 68: 97.90419200062752
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 69: 110.3137341439724
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 70: 74.97883102297783
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 71: 134.9704020023346
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 72: 129.62234935164452
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 73: 91.5139736533165
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 74: 96.01363289356232
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 75: 81.18087247014046
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 76: 103.18807968497276
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 77: 69.41417783498764
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 78: 82.66316598653793
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 79: 81.66221505403519
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 80: 70.45254300534725
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 81: 119.06382429599762
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 82: 130.21526116132736
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 83: 71.30772262811661
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 84: 229.87983453273773
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 85: 111.95442169904709
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 86: 110.05683419108391
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 87: 119.41466444730759
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 88: 77.06612667441368
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 89: 112.72869235277176
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 90: 137.44334656000137
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 91: 120.86505365371704
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 92: 80.7532787322998
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 93: 138.08818936347961
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 94: 72.32260593771935
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 95: 69.03594282269478
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 96: 124.24560424685478
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 97: 69.58178141713142
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 98: 45.79142136871815
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 99: 111.6274031996727
+[2024-09-08 00:15:04,099][flwr][INFO] - 		round 100: 71.90804445743561
+[2024-09-08 00:15:04,100][flwr][INFO] - 	History (metrics, centralized):
+[2024-09-08 00:15:04,100][flwr][INFO] - 	{'accuracy': [(0, 0.10114001753873136),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (1, 0.2753580824320374),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (2, 0.16924875767319497),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (3, 0.35954399298450745),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (4, 0.47763811750950014),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (5, 0.38702133878982753),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (6, 0.2578193510669395),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (7, 0.2630809704764689),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (8, 0.44548377667348726),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (9, 0.4866997953814674),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (10, 0.49985384390529086),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (11, 0.6036246711487869),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (12, 0.30838935983630517),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (13, 0.23911137094416837),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (14, 0.3510669394913768),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (15, 0.5942706810874013),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (16, 0.5986553639286758),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (17, 0.5252850043846828),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (18, 0.49576147325343467),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (19, 0.4144986845951476),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (20, 0.4805612394036831),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (21, 0.4674071908798597),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (22, 0.3648056123940368),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (23, 0.6670564162525577),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (24, 0.2610347851505408),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (25, 0.5051154633148203),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (26, 0.597778427360421),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (27, 0.4586378251973107),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (28, 0.6959953230049694),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (29, 0.5457468576439638),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (30, 0.4370067231803566),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (31, 0.36422098801520025),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (32, 0.670271850336159),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (33, 0.6936568254896229),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (34, 0.43379128909675535),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (35, 0.4104063139432914),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (36, 0.6617947968430283),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (37, 0.532300496930722),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (38, 0.7781350482315113),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (39, 0.6723180356620871),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (40, 0.6080093539900614),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (41, 0.6921952645425314),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (42, 0.278865828705057),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (43, 0.44343759134755917),
+[2024-09-08 00:15:04,100][flwr][INFO] - 	              (44, 0.5399006138555977),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (45, 0.7243496053785443),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (46, 0.6454253142356037),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (47, 0.4405144694533762),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (48, 0.6734872844197604),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (49, 0.6407483192049108),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (50, 0.5255773165741011),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (51, 0.5530546623794212),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (52, 0.6389944460684011),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (53, 0.5869628763519439),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (54, 0.754457760888629),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (55, 0.7249342297573809),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (56, 0.7912890967553347),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (57, 0.5168079508915522),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (58, 0.737795966091786),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (59, 0.47500730780473543),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (60, 0.8021046477638117),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (61, 0.6501023092662964),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (62, 0.4533762057877814),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (63, 0.687810581701257),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (64, 0.6805027769657995),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (65, 0.35954399298450745),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (66, 0.6074247296112247),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (67, 0.642794504530839),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (68, 0.665302543116048),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (69, 0.7179187372113417),
+[2024-09-08 00:15:04,101][flwr][INFO] - 	              (70, 0.7547500730780473),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (71, 0.572347266881029),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (72, 0.6758257819351067),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (73, 0.6962876351943876),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (74, 0.6767027185033616),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (75, 0.7556270096463023),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (76, 0.6901490792166033),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (77, 0.763227126571178),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (78, 0.6992107570885706),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (79, 0.7255188541362175),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (80, 0.7477345805320081),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (81, 0.6261327097339959),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (82, 0.5682548962291728),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (83, 0.7635194387605964),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (84, 0.518561824028062),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (85, 0.642794504530839),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (86, 0.6828412744811458),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (87, 0.7138263665594855),
+[2024-09-08 00:15:04,102][flwr][INFO] - 	              (88, 0.797427652733119),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (89, 0.6840105232388191),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (90, 0.6322712657117802),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (91, 0.6141479099678456),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (92, 0.7158725518854137),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (93, 0.5457468576439638),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (94, 0.7486115171002631),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (95, 0.7538731365097925),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (96, 0.6305173925752704),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (97, 0.7845659163987139),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (98, 0.8535515931014324),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (99, 0.6465945629932768),
+[2024-09-08 00:15:04,103][flwr][INFO] - 	              (100, 0.7623501900029231)]}
+[2024-09-08 00:15:04,103][flwr][INFO] - 
