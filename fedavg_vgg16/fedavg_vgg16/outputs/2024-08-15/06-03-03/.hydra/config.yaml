@@ -1,0 +1,22 @@
+seed: 42
+num_clients: 16
+num_rounds: 10
+client_resources:
+  num_cpus: 24
+  num_gpus: 0.5
+config_fit:
+  lr: 0.01
+  momentum: 0.9
+  local_epochs: 5
+dataset:
+  name: BahaaEldin0/NIH-Chest-Xray-14-with-Augmentation
+  data_dir: ./data
+  seed: 42
+  partitioner:
+    name: Iid
+    alpha: 0.1
+    num_classes_per_partition: 2
+model:
+  num_classes: 10
+plot:
+  smoothing_window: 1
