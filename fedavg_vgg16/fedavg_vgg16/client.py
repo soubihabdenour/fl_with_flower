@@ -9,7 +9,7 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchvision import models
 
-from fedavg_mobilnet.utils import train, test, apply_transforms
+from fedavg_vgg16.utils import train, test, apply_transforms
 
 
 
@@ -20,8 +20,7 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.mobilenet_v2(weights=models.MobileNet_V2_Weights.DEFAULT)
-
+        self.model = models.vgg16(pretrained=True)
         self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

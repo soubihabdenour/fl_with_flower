@@ -12,7 +12,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import models
 
-from fedavg_mobilnet.utils import test, apply_transforms
+from fedavg_vgg16.utils import test, apply_transforms
 
 
 def fit_config(epochs: int) -> Dict[str, Scalar]:
@@ -44,7 +44,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         """Use the test set for evaluation."""
 
         # Determine device
-        model = models.mobilenet_v2(weights=models.MobileNet_V2_Weights.DEFAULT)
+        model = models.vgg16(pretrained=True)
 
         model.classifier[1] = nn.Linear(model.last_channel, num_classes)
 

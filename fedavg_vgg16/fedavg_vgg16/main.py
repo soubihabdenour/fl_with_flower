@@ -5,10 +5,10 @@ from datasets import disable_progress_bar
 from omegaconf import DictConfig, OmegaConf
 import flwr as fl
 
-from fedavg_mobilnet.client import get_client_fn
-from fedavg_mobilnet.dataset import get_data
-from fedavg_mobilnet.server import fit_config, weighted_average, get_evaluate_fn
 from plot import smooth_plot
+from fedavg_vgg16.client import get_client_fn
+from fedavg_vgg16.dataset import get_data
+from fedavg_vgg16.server import fit_config, weighted_average, get_evaluate_fn
 
 
 @hydra.main(config_path='conf', config_name='base', version_base=None)
