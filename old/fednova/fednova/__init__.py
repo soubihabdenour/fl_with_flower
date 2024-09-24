@@ -1,1 +1,0 @@
-"""Fednova baseline."""
