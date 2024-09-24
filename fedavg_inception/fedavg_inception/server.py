@@ -44,11 +44,14 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         """Use the test set for evaluation."""
 
         # Load the InceptionV3 model
-        model = models.inception_v3()
-
-        # Replace the fully connected (fc) layer with a new one for num_classes
-        in_features = model.fc.in_features
-        model.fc = nn.Linear(in_features, num_classes)
+        model = models.vgg19()
+        in_features = model.classifier[6].in_features
+        model.classifier[6] = nn.Linear(in_features, num_classes)
+        # model = models.inception_v3()
+        #
+        # # Replace the fully connected (fc) layer with a new one for num_classes
+        # in_features = model.fc.in_features
+        # model.fc = nn.Linear(in_features, num_classes)
 
         # Move model to the appropriate device (GPU/CPU)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
