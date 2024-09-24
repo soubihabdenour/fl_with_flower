@@ -23,7 +23,8 @@ class FlowerClient(fl.client.NumPyClient):
         in_features = self.model.fc.in_features
         print('infuturs=-=========================', in_features)
         self.model.fc = nn.Linear(in_features, num_classes)
-
+        self.model.aux_logits = False
+        self.model.AuxLogits = None
         #self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

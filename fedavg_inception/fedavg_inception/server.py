@@ -49,6 +49,9 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         # Replace the fully connected (fc) layer with a new one for num_classes
         in_features = model.fc.in_features
         model.fc = nn.Linear(in_features, num_classes)
+        model.aux_logits = False
+        model.AuxLogits = None
+
         # Move model to the appropriate device (GPU/CPU)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
