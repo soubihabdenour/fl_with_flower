@@ -78,6 +78,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
 
 def set_params(model: nn.Module, params: List[fl.common.NDArrays]):
     """Set model weights from a list of NumPy ndarrays."""
+    print(params)
     params_dict = zip(model.state_dict().keys(), params)
     state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
     print('yes 1 ===============================')
