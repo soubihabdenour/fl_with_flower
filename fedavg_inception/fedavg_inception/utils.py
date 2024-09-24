@@ -2,16 +2,17 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from flwr.client.mod import LocalDpMod
+from torchvision import transforms
 from torchvision.transforms import Compose, Normalize, ToTensor, Grayscale, Resize
 
 
 # transformation to convert images to tensors and apply normalization
 def apply_transforms(batch):
     tf = Compose([
-        Resize((224, 224)),
-        Grayscale(num_output_channels=3),  # Convert grayscale to 3 channels
-        ToTensor(),
-        Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
     # Apply transformations
