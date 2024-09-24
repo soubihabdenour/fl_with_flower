@@ -49,14 +49,13 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         # Replace the fully connected (fc) layer with a new one for num_classes
         in_features = model.fc.in_features
         model.fc = nn.Linear(in_features, num_classes)
-
         # Move model to the appropriate device (GPU/CPU)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
         # Set the model parameters from the federated learning server
         set_params(model, parameters)
         model.to(device)
-
         # Apply transformations to the centralized testset
         testset = centralized_testset.with_transform(apply_transforms)
 
@@ -69,6 +68,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         # Run the test function and return the loss and accuracy
         loss, accuracy = test(model, testloader, device=device)
 
+
         return loss, {"accuracy": accuracy}
 
     return evaluate
@@ -78,4 +78,6 @@ def set_params(model: nn.Module, params: List[fl.common.NDArrays]):
     """Set model weights from a list of NumPy ndarrays."""
     params_dict = zip(model.state_dict().keys(), params)
     state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
-    model.load_state_dict(state_dict, strict=True)
+    print('yes 1 ===============================', state_dict)
+    model.load_state_dict(state_dict, strict=False)
+    print('yes 2 ===============================')
