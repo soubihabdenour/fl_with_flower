@@ -19,12 +19,10 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.inception_v3(weights=Inception_V3_Weights.DEFAULT)
+        self.model = models.inception_v3()
         in_features = self.model.fc.in_features
-        print('infuturs=-=========================', in_features)
+        print('infuturs=-=========================', self.model.fc)
         self.model.fc = nn.Linear(in_features, num_classes)
-        self.model.aux_logits = False
-        self.model.AuxLogits = None
         #self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
