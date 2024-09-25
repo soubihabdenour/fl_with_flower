@@ -19,7 +19,7 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.inception_v3(weights=Inception_V3_Weights.DEFAULT, num_classes=num_classes)
+        self.model = models.inception_v3( num_classes=8)
         # Get the number of input features of the last fully connected layer
         # in_features = self.model.fc.in_features
         #
