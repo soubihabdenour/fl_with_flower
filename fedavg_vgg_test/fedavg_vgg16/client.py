@@ -20,7 +20,7 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.resnet101(weights='DEFAULT')
+        self.model = models.resnet101()
         #self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
         # Replace the last fully connected layer
         # VGG16's final classifier layer is at index 6
