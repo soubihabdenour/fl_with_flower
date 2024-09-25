@@ -4,14 +4,14 @@ from collections import OrderedDict
 from typing import List
 import flwr as fl
 import torch
+from PyQt5.QtGui.QRawFont import weight
 from flwr_datasets import FederatedDataset
 from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchvision import models
 
 from fedavg_vgg16.utils import train, test, apply_transforms
-from torchvision.models import VGG16_Weights, VGG19_Weights
-
+from torchvision.models import VGG16_Weights, VGG19_Weights, resnet101
 
 
 # Define Flower Client
@@ -20,7 +20,7 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.vgg19(weights=VGG19_Weights.DEFAULT)
+        self.model = models.resnet101(weights='DEFAULT')
         #self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
         # Replace the last fully connected layer
         # VGG16's final classifier layer is at index 6
