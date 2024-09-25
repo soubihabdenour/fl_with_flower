@@ -19,12 +19,12 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.resnet50()
+        self.model = models.inception_v3(weights=Inception_V3_Weights, pretrained=True,  num_classes=num_classes)
         # Get the number of input features of the last fully connected layer
-        in_features = self.model.fc.in_features
-
-        # Replace the last fully connected layer with a new one with `num_classes` outputs
-        self.model.fc = nn.Linear(in_features, num_classes)
+        # in_features = self.model.fc.in_features
+        #
+        # # Replace the last fully connected layer with a new one with `num_classes` outputs
+        # self.model.fc = nn.Linear(in_features, num_classes)
 
         # in_features = self.model.classifier[6].in_features
         # self.model.classifier[6] = nn.Linear(in_features, num_classes)

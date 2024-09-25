@@ -8,7 +8,7 @@ from torchvision.transforms import Compose, Normalize, ToTensor, Grayscale, Resi
 # transformation to convert images to tensors and apply normalization
 def apply_transforms(batch):
     tf = Compose([
-        Resize((224, 224)),
+        Resize((299, 299)),
         Grayscale(num_output_channels=3),  # Convert grayscale to 3 channels
         ToTensor(),
         Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
