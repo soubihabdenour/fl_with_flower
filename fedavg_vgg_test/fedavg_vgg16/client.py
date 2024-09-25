@@ -4,7 +4,7 @@ from collections import OrderedDict
 from typing import List
 import flwr as fl
 import torch
-from PyQt5.QtGui.QRawFont import weight
+
 from flwr_datasets import FederatedDataset
 from torch import nn, optim
 from torch.utils.data import DataLoader
