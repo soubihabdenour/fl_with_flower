@@ -16,7 +16,7 @@ base_dir = '/home/abdenour/PycharmProjects/fl_with_flower/results'
 # Assign distinct colors for each algorithm
 algorithm_colors = {
     'fedavg': '#1f77b4',  # Blue
-    'fedavgm': '#ff7f0e',  # Orange
+    'fednova': '#ff7f0e',  # Orange
 }
 
 # Function to load accuracy data from a CSV file
@@ -73,7 +73,7 @@ def create_single_iid_poisoned_subplot(figure_title, partitioner_type):
     ax.grid(True)
 
     plt.tight_layout(rect=[0, 0, 1, 0.95])
-    plt.savefig(os.path.join(base_dir, figure_title + '.pdf'))
+    plt.savefig(os.path.join(base_dir, 'static', figure_title + '.pdf'))
     plt.show()
 
 # Create the figure for iid_poisoned partitioner with error bars

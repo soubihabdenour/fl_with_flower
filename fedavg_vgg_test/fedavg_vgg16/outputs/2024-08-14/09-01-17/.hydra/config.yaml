@@ -1,0 +1,19 @@
+seed: 42
+num_clients: 20
+num_rounds: 20
+client_resources:
+  num_cpus: 4
+  num_gpus: 0.2
+config_fit:
+  lr: 0.01
+  momentum: 0.9
+  local_epochs: 10
+dataset:
+  name: hf-vision/chest-xray-pneumonia
+  data_dir: ./data
+  partitioner:
+    name: DirichletPartitioner
+    alpha: 1.0
+    num_classes_per_partition: 2
+model:
+  num_classes: 2

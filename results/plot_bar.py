@@ -97,7 +97,7 @@ def create_figure(figure_title, partitioner_type):
 
     # Adjust layout to fit everything properly
     plt.tight_layout(rect=[0, 0, 1, 0.925])
-    plt.savefig(os.path.join(base_dir, figure_title + '.pdf'))
+    plt.savefig(os.path.join(base_dir, 'static', figure_title + '.pdf'))
     plt.show()
 
 # Create two figures: one for Dirichlet partitioner and one for Pathological partitioner (Bar plot of Mean Tail 10 with error bars)

@@ -66,7 +66,7 @@ def create_figure(figure_title, partitioner_type):
     fig.legend(handles, labels, loc='upper center', ncol=len(algorithms), fontsize=14, bbox_to_anchor=(0.5, 0.96))
 
     plt.tight_layout(rect=[0, 0, 1, 0.925])
-    plt.savefig(os.path.join(base_dir, figure_title + '.pdf'))
+    plt.savefig(os.path.join(base_dir, 'static', figure_title + '.pdf'))
     plt.show()
 
 # Create two figures: one for Dirichlet partitioner and one for Pathological partitioner
