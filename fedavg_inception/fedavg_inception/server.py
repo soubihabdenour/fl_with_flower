@@ -44,7 +44,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         """Use the test set for evaluation."""
 
         # Load the InceptionV3 model
-        model = models.inception_v3(weights=Inception_V3_Weights, pretrained=True, num_classes=num_classes)
+        model = models.inception_v3(num_classes=num_classes)
         # model = models.inception_v3()
         #
         # # Replace the fully connected (fc) layer with a new one for num_classes
