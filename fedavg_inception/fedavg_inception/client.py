@@ -19,7 +19,13 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.googlenet(num_classes=num_classes)
+        self.model = models.resnet50()
+        # Get the number of input features of the last fully connected layer
+        in_features = self.model.fc.in_features
+
+        # Replace the last fully connected layer with a new one with `num_classes` outputs
+        self.model.fc = nn.Linear(in_features, num_classes)
+
         # in_features = self.model.classifier[6].in_features
         # self.model.classifier[6] = nn.Linear(in_features, num_classes)
         #in_features = self.model.fc.in_features
