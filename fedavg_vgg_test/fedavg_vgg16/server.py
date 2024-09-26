@@ -53,7 +53,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         # model = models.MobileNetV2(num_classes=2)
         # model.classifier[-1] = nn.Linear(in_features=4096, out_features=2)
-
+        print('set param====================')
         set_params(model, parameters)
         model.to(device)
 
