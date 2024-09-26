@@ -45,7 +45,7 @@ class FlowerClient(fl.client.NumPyClient):
 
         # Construct dataloader
         trainloader = DataLoader(self.trainset, batch_size=batch, shuffle=True)
-
+        print('trainloader=============================================')
         # Define optimizer
         optimizer = optim.Adam(self.model.parameters(), lr=0.001)
         # Train
