@@ -54,7 +54,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         # model = models.MobileNetV2(num_classes=2)
         # model.classifier[-1] = nn.Linear(in_features=4096, out_features=2)
         for param in parameters():
-            print('set param====================', param.shape)
+            print('set param====================', len(param))
         set_params(model, parameters)
         model.to(device)
 
