@@ -45,7 +45,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         """Use the test set for evaluation."""
 
         # Determine device
-        model = models.efficientnet_b7(num_classes=num_classes)
+        model = models.resnet101(num_classes=8)
         #model.classifier[1] = nn.Linear(model.last_channel, num_classes)
         # in_features = model.classifier[6].in_features
         # model.classifier[6] = nn.Linear(in_features, num_classes)
@@ -53,7 +53,6 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         # model = models.MobileNetV2(num_classes=2)
         # model.classifier[-1] = nn.Linear(in_features=4096, out_features=2)
-        print('==================== is ==============', parameters)
 
         set_params(model, parameters)
         model.to(device)
