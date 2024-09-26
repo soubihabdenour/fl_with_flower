@@ -31,7 +31,7 @@ class FlowerClient(fl.client.NumPyClient):
         self.model = self.model.to(self.device)
 
     def get_parameters(self, config):
-        print('sending parameters============================================')
+
         return [val.cpu().numpy() for _, val in self.model.state_dict().items()]
 
     def get_mal_parameters(self, config):
@@ -50,7 +50,7 @@ class FlowerClient(fl.client.NumPyClient):
         optimizer = optim.Adam(self.model.parameters(), lr=0.001)
         # Train
         train(self.model, trainloader, optimizer, epochs=epochs, device=self.device)
-
+        print('sending parameters============================================')
         # Return local model and statistics
         return self.get_parameters({}), len(trainloader.dataset), {}
 
