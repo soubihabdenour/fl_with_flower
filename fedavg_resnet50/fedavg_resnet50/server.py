@@ -44,7 +44,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         """Use the test set for evaluation."""
 
         # Determine device
-        model = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)
+        model = models.resnet101(weights=models.ResNet101_Weights.DEFAULT)
         # Remove last layer and flatten outputs
         model = torch.nn.Sequential(
             *(list(model.children())[:-1]), torch.nn.Flatten(), nn.Linear(in_features=2048, out_features=num_classes)

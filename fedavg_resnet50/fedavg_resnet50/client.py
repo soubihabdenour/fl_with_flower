@@ -19,7 +19,7 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)
+        self.model = models.resnet101(weights=models.ResNet101_Weights.DEFAULT)
         # Remove last layer and flatten outputs
         #print(list(self.model.children())[:-1])
         self.model = torch.nn.Sequential(
