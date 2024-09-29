@@ -20,7 +20,14 @@ class FlowerClient(fl.client.NumPyClient):
         self.trainset = trainset
         self.valset = valset
 
-        self.model = models.densenet201(num_classes= num_classes)
+        self.model = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)
+        # Remove last layer and flatten outputs
+        self.model = torch.nn.Sequential(
+            *(list(self.model.children())[:-1]), torch.nn.Flatten(), nn.Linear(in_features=2048, out_features=num_classes)
+        )
+        # Set the hidden_dimension
+        self.model.hidden_dimension = 2048
+
         #self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
         # Replace the last fully connected layer
         # VGG16's final classifier layer is at index 6
