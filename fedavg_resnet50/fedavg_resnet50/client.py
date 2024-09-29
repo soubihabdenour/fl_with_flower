@@ -21,7 +21,7 @@ class FlowerClient(fl.client.NumPyClient):
 
         self.model = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)
         # Remove last layer and flatten outputs
-        print(list(self.model.children())[:-1])
+        #print(list(self.model.children())[:-1])
         self.model = torch.nn.Sequential(
             *(list(self.model.children())[:-1]), torch.nn.Flatten(), nn.Linear(in_features=2048, out_features=num_classes)
         )
