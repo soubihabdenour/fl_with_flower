@@ -14,10 +14,10 @@ from fednova_resnet101.server import fit_config, weighted_average, get_evaluate_
 @hydra.main(config_path='conf', config_name='base', version_base=None)
 def main(cfg: DictConfig):
     print(OmegaConf.to_yaml(cfg))
-    save_path = Path(HydraConfig.get().runtime.output_dir, cfg.dataset.subset, cfg.dataset.partitioner.name)
-    # Check if the path exists, if not, create the directory
-    if not save_path.exists():
-        save_path.mkdir(parents=True, exist_ok=True)
+    save_path = Path(HydraConfig.get().runtime.output_dir)
+    # # Check if the path exists, if not, create the directory
+    # if not save_path.exists():
+    #     save_path.mkdir(parents=True, exist_ok=True)
     # Resources to be assigned to each virtual client
     client_resources = {
         "num_cpus": cfg.client_resources.num_cpus,
