@@ -1,0 +1,31 @@
+[2024-10-02 14:47:51,939][flwr][INFO] - Starting Flower simulation, config: num_rounds=1, no round_timeout
+[2024-10-02 14:47:55,109][flwr][INFO] - Flower VCE: Ray initialized with resources: {'memory': 157744377652.0, 'object_store_memory': 71890447564.0, 'node:115.145.172.224': 1.0, 'CPU': 256.0, 'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0, 'GPU': 5.0}
+[2024-10-02 14:47:55,109][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-10-02 14:47:55,109][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 64, 'num_gpus': 0.125}
+[2024-10-02 14:47:55,123][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 4 actors
+[2024-10-02 14:47:55,123][flwr][INFO] - [INIT]
+[2024-10-02 14:47:55,123][flwr][INFO] - Requesting initial parameters from one random client
+[2024-10-02 14:48:00,690][flwr][INFO] - Received initial parameters from one random client
+[2024-10-02 14:48:00,690][flwr][INFO] - Evaluating initial global parameters
+[2024-10-02 14:48:21,014][flwr][INFO] - initial parameters (loss, other metrics): 496.8062596321106, {'accuracy': 0.12465181058495822}
+[2024-10-02 14:48:21,014][flwr][INFO] - 
+[2024-10-02 14:48:21,014][flwr][INFO] - [ROUND 1]
+[2024-10-02 14:48:21,015][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-10-02 14:49:45,598][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-10-02 14:49:46,528][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-10-02 14:50:04,653][flwr][INFO] - fit progress: (1, 364.4937847852707, {'accuracy': 0.5182451253481895}, 103.63831466110423)
+[2024-10-02 14:50:04,653][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-10-02 14:50:06,565][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-10-02 14:50:06,586][flwr][INFO] - 
+[2024-10-02 14:50:06,586][flwr][INFO] - [SUMMARY]
+[2024-10-02 14:50:06,586][flwr][INFO] - Run finished 1 round(s) in 105.55s
+[2024-10-02 14:50:06,586][flwr][INFO] - 	History (loss, distributed):
+[2024-10-02 14:50:06,587][flwr][INFO] - 		round 1: 5.11475670337677
+[2024-10-02 14:50:06,587][flwr][INFO] - 	History (loss, centralized):
+[2024-10-02 14:50:06,587][flwr][INFO] - 		round 0: 496.8062596321106
+[2024-10-02 14:50:06,587][flwr][INFO] - 		round 1: 364.4937847852707
+[2024-10-02 14:50:06,587][flwr][INFO] - 	History (metrics, distributed, evaluate):
+[2024-10-02 14:50:06,587][flwr][INFO] - 	{'accuracy': [(1, 0.46994535519125685)]}
+[2024-10-02 14:50:06,587][flwr][INFO] - 	History (metrics, centralized):
+[2024-10-02 14:50:06,587][flwr][INFO] - 	{'accuracy': [(0, 0.12465181058495822), (1, 0.5182451253481895)]}
+[2024-10-02 14:50:06,587][flwr][INFO] - 

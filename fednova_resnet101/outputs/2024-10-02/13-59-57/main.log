@@ -1,0 +1,287 @@
+[2024-10-02 13:59:59,670][flwr][INFO] - Starting Flower simulation, config: num_rounds=1, no round_timeout
+[2024-10-02 14:00:02,763][flwr][INFO] - Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'CPU': 256.0, 'GPU': 5.0, 'accelerator_type:G': 1.0, 'memory': 157793888461.0, 'object_store_memory': 71911666483.0, 'node:115.145.172.224': 1.0}
+[2024-10-02 14:00:02,763][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-10-02 14:00:02,763][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 16, 'num_gpus': 0.5}
+[2024-10-02 14:00:02,781][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 10 actors
+[2024-10-02 14:00:02,781][flwr][INFO] - [INIT]
+[2024-10-02 14:00:02,781][flwr][INFO] - Requesting initial parameters from one random client
+[2024-10-02 14:00:07,726][flwr][INFO] - Received initial parameters from one random client
+[2024-10-02 14:00:07,726][flwr][INFO] - Evaluating initial global parameters
+[2024-10-02 14:00:17,436][flwr][INFO] - initial parameters (loss, other metrics): 227.0982644557953, {'accuracy': 0.10230926629640456}
+[2024-10-02 14:00:17,436][flwr][INFO] - 
+[2024-10-02 14:00:17,436][flwr][INFO] - [ROUND 1]
+[2024-10-02 14:00:17,436][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-10-02 14:00:22,057][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=1233714, ip=115.145.172.224, actor_id=1fc678745c9a08844696b65901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f715c38da50>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/home/abdenour/fl_with_flower/fednova_resnet101/fednova_resnet101/client.py", line 71, in fit
+    train(self.model, trainloader, self.optimizer, epochs=num_epochs, device=self.device)
+  File "/home/abdenour/fl_with_flower/fednova_resnet101/fednova_resnet101/utils.py", line 57, in train
+    loss = criterion(net(images), labels)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torchvision/models/resnet.py", line 158, in forward
+    identity = self.downsample(x)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 176, in forward
+    return F.batch_norm(
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/functional.py", line 2512, in batch_norm
+    return torch.batch_norm(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 196.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 80.69 MiB is free. Process 1233715 has 8.99 GiB memory in use. Including non-PyTorch memory, this process has 1.68 GiB memory in use. Of the allocated memory 1.49 GiB is allocated by PyTorch, and 10.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=1233714, ip=115.145.172.224, actor_id=1fc678745c9a08844696b65901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f715c38da50>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 196.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 80.69 MiB is free. Process 1233715 has 8.99 GiB memory in use. Including non-PyTorch memory, this process has 1.68 GiB memory in use. Of the allocated memory 1.49 GiB is allocated by PyTorch, and 10.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+[2024-10-02 14:00:22,058][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=1233714, ip=115.145.172.224, actor_id=1fc678745c9a08844696b65901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f715c38da50>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/home/abdenour/fl_with_flower/fednova_resnet101/fednova_resnet101/client.py", line 71, in fit
+    train(self.model, trainloader, self.optimizer, epochs=num_epochs, device=self.device)
+  File "/home/abdenour/fl_with_flower/fednova_resnet101/fednova_resnet101/utils.py", line 57, in train
+    loss = criterion(net(images), labels)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torchvision/models/resnet.py", line 158, in forward
+    identity = self.downsample(x)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 176, in forward
+    return F.batch_norm(
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/functional.py", line 2512, in batch_norm
+    return torch.batch_norm(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 196.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 80.69 MiB is free. Process 1233715 has 8.99 GiB memory in use. Including non-PyTorch memory, this process has 1.68 GiB memory in use. Of the allocated memory 1.49 GiB is allocated by PyTorch, and 10.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=1233714, ip=115.145.172.224, actor_id=1fc678745c9a08844696b65901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f715c38da50>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 196.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 80.69 MiB is free. Process 1233715 has 8.99 GiB memory in use. Including non-PyTorch memory, this process has 1.68 GiB memory in use. Of the allocated memory 1.49 GiB is allocated by PyTorch, and 10.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[2024-10-02 14:00:22,617][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=1233712, ip=115.145.172.224, actor_id=da52c7da4d4d5d47d9658e7e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9154275a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/home/abdenour/fl_with_flower/fednova_resnet101/fednova_resnet101/client.py", line 71, in fit
+    train(self.model, trainloader, self.optimizer, epochs=num_epochs, device=self.device)
+  File "/home/abdenour/fl_with_flower/fednova_resnet101/fednova_resnet101/utils.py", line 57, in train
+    loss = criterion(net(images), labels)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torchvision/models/resnet.py", line 158, in forward
+    identity = self.downsample(x)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 176, in forward
+    return F.batch_norm(
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/functional.py", line 2512, in batch_norm
+    return torch.batch_norm(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 196.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 182.75 MiB is free. Process 1233713 has 8.89 GiB memory in use. Including non-PyTorch memory, this process has 1.68 GiB memory in use. Of the allocated memory 1.49 GiB is allocated by PyTorch, and 10.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=1233712, ip=115.145.172.224, actor_id=da52c7da4d4d5d47d9658e7e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9154275a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 196.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 182.75 MiB is free. Process 1233713 has 8.89 GiB memory in use. Including non-PyTorch memory, this process has 1.68 GiB memory in use. Of the allocated memory 1.49 GiB is allocated by PyTorch, and 10.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+[2024-10-02 14:00:22,617][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=1233712, ip=115.145.172.224, actor_id=da52c7da4d4d5d47d9658e7e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9154275a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/home/abdenour/fl_with_flower/fednova_resnet101/fednova_resnet101/client.py", line 71, in fit
+    train(self.model, trainloader, self.optimizer, epochs=num_epochs, device=self.device)
+  File "/home/abdenour/fl_with_flower/fednova_resnet101/fednova_resnet101/utils.py", line 57, in train
+    loss = criterion(net(images), labels)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torchvision/models/resnet.py", line 158, in forward
+    identity = self.downsample(x)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 176, in forward
+    return F.batch_norm(
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/functional.py", line 2512, in batch_norm
+    return torch.batch_norm(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 196.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 182.75 MiB is free. Process 1233713 has 8.89 GiB memory in use. Including non-PyTorch memory, this process has 1.68 GiB memory in use. Of the allocated memory 1.49 GiB is allocated by PyTorch, and 10.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=1233712, ip=115.145.172.224, actor_id=da52c7da4d4d5d47d9658e7e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9154275a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 196.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 182.75 MiB is free. Process 1233713 has 8.89 GiB memory in use. Including non-PyTorch memory, this process has 1.68 GiB memory in use. Of the allocated memory 1.49 GiB is allocated by PyTorch, and 10.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[2024-10-02 14:00:24,352][flwr][INFO] - aggregate_fit: received 3 results and 2 failures
+[2024-10-02 14:00:24,820][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-10-02 14:00:33,724][flwr][INFO] - fit progress: (1, 225.54439210891724, {'accuracy': 0.17684887459807075}, 16.2873143539764)
+[2024-10-02 14:00:33,724][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-10-02 14:00:34,950][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-10-02 14:00:34,956][flwr][INFO] - 
+[2024-10-02 14:00:34,956][flwr][INFO] - [SUMMARY]
+[2024-10-02 14:00:34,956][flwr][INFO] - Run finished 1 round(s) in 17.51s
+[2024-10-02 14:00:34,956][flwr][INFO] - 	History (loss, distributed):
+[2024-10-02 14:00:34,957][flwr][INFO] - 		round 1: 2.0738235569000243
+[2024-10-02 14:00:34,957][flwr][INFO] - 	History (loss, centralized):
+[2024-10-02 14:00:34,957][flwr][INFO] - 		round 0: 227.0982644557953
+[2024-10-02 14:00:34,957][flwr][INFO] - 		round 1: 225.54439210891724
+[2024-10-02 14:00:34,957][flwr][INFO] - 	History (metrics, distributed, evaluate):
+[2024-10-02 14:00:34,957][flwr][INFO] - 	{'accuracy': [(1, 0.24)]}
+[2024-10-02 14:00:34,957][flwr][INFO] - 	History (metrics, centralized):
+[2024-10-02 14:00:34,957][flwr][INFO] - 	{'accuracy': [(0, 0.10230926629640456), (1, 0.17684887459807075)]}
+[2024-10-02 14:00:34,957][flwr][INFO] - 
