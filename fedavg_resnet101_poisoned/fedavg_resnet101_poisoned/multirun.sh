@@ -20,7 +20,7 @@ run_experiment() {
   echo "Starting experiment with dataset=${dataset}, partitioner=${partitioner}, ${partition_param}=${partition_value}, model.num_classes=${num_classes}"
 
   # Run the experiment
-  python -m fednova_resnet101.main hydra.run.dir=$output_dir dataset.subset="$dataset" dataset.partitioner.name="$partitioner" dataset.partitioner.$partition_param="$partition_value" model.num_classes="$num_classes"
+  python -m fedavg_resnet101_poisoned.main hydra.run.dir=$output_dir dataset.subset="$dataset" dataset.partitioner.name="$partitioner" dataset.partitioner.$partition_param="$partition_value" model.num_classes="$num_classes"
 
   # Check if the experiment failed
   if [ $? -ne 0 ]; then
