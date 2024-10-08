@@ -11,9 +11,9 @@ from torch.utils.data import DataLoader
 from torchvision import models
 from typing import Callable, Dict, List, Tuple
 
-from fednova_mobilnet.utils import train, test, apply_transforms
+from fednova_mobilnet_poisoned.utils import train, test, apply_transforms
 
-from fednova_mobilnet.models import ProxSGD
+from fednova_mobilnet_poisoned.models import ProxSGD
 
 
 # Define Flower Client

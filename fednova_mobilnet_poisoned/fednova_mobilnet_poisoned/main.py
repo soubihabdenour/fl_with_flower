@@ -6,10 +6,10 @@ from datasets import disable_progress_bar
 from omegaconf import DictConfig, OmegaConf
 import flwr as fl
 
-from fednova_mobilnet.client import get_client_fn
-from fednova_mobilnet.dataset import get_data
-from fednova_mobilnet.server import fit_config, weighted_average, get_evaluate_fn
 from plot import smooth_plot
+from fednova_mobilnet_poisoned.client import get_client_fn
+from fednova_mobilnet_poisoned.dataset import get_data
+from fednova_mobilnet_poisoned.server import fit_config, weighted_average, get_evaluate_fn
 
 
 @hydra.main(config_path='conf', config_name='base', version_base=None)

@@ -12,7 +12,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import models
 
-from fednova_mobilnet.utils import test, apply_transforms
+from fednova_mobilnet_poisoned.utils import test, apply_transforms
 
 
 def fit_config(epochs: int) -> Dict[str, Scalar]:
