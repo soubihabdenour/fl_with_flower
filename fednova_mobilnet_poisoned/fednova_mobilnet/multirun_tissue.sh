@@ -2,7 +2,7 @@ cd ..
 # Experiment 2
 echo "Starting Experiment 3"
 
-#python -m fednova_resnet101.main dataset.subset="tissuemnist" dataset.partitioner.name="PathologicalPartitioner" dataset.partitioner.num_classes_per_partition=7 model.num_classes=8
+#python -m fednova_resnet101_poisoned.main dataset.subset="tissuemnist" dataset.partitioner.name="PathologicalPartitioner" dataset.partitioner.num_classes_per_partition=7 model.num_classes=8
 
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
@@ -11,7 +11,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Starting Experiment 2"
-#python -m fednova_resnet101.main dataset.subset="tissuemnist" dataset.partitioner.name="PathologicalPartitioner" dataset.partitioner.num_classes_per_partition=4 model.num_classes=8
+#python -m fednova_resnet101_poisoned.main dataset.subset="tissuemnist" dataset.partitioner.name="PathologicalPartitioner" dataset.partitioner.num_classes_per_partition=4 model.num_classes=8
 # Check if Experiment 2 succeeded
 if [ $? -ne 0 ]; then
   echo "Experiment 2 failed!"
@@ -20,7 +20,7 @@ fi
 # Experiment 1
 echo "Starting Experiment 1 "
 
-#python -m fednova_resnet101.main dataset.subset="tissuemnist" dataset.partitioner.name="PathologicalPartitioner" dataset.partitioner.num_classes_per_partition=2 model.num_classes=8
+#python -m fednova_resnet101_poisoned.main dataset.subset="tissuemnist" dataset.partitioner.name="PathologicalPartitioner" dataset.partitioner.num_classes_per_partition=2 model.num_classes=8
 
 # Check if Experiment 1 succeeded
 if [ $? -ne 0 ]; then

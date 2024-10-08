@@ -28,6 +28,11 @@ class FlowerClient(fl.client.NumPyClient):
         # Set the hidden_dimension
         self.model.hidden_dimension = 2048
 
+        # Count the number of trainable parameters
+        trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+
+        print(f"Number of trainable parameters: {trainable_params}")
+
         #self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
         # Replace the last fully connected layer
         # VGG16's final classifier layer is at index 6

@@ -31,6 +31,10 @@ class FlowerClient(fl.client.NumPyClient):
         self.model.classifier[6] = nn.Linear(in_features, num_classes)
         self.client_id = cid["partition-id"]
         print(cid,"cid================================")
+        # Count the number of trainable parameters
+        trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+
+        print(f"Number of trainable parameters: {trainable_params}")
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = self.model.to(self.device)
