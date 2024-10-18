@@ -3,23 +3,44 @@ import torch.nn as nn
 import torch.nn.functional as F
 from flwr.client.mod import LocalDpMod
 from torchvision.transforms import Compose, Normalize, ToTensor, Grayscale, Resize
+from torch.optim import Optimizer
+from torch.utils.data import DataLoader
 
 
-# transformation to convert images to tensors and apply normalization
-def apply_transforms(batch):
-    tf = Compose([
+# Transformation to convert images to tensors and apply normalization
+def apply_transforms(batch: dict) -> dict:
+    """
+    Apply transformations to the batch of images, including resizing, grayscale conversion,
+    tensor conversion, and normalization.
+
+    Args:
+        batch (dict): Batch of images and labels where 'image' is a list of images.
+
+    Returns:
+        dict: Batch with transformed images.
+    """
+    transform = Compose([
         Resize((224, 224)),
         Grayscale(num_output_channels=3),  # Convert grayscale to 3 channels
         ToTensor(),
-        Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])  # ImageNet mean and std normalization
     ])
 
     # Apply transformations
-    batch["image"] = [tf(img) for img in batch["image"]]
+    batch["image"] = [transform(img) for img in batch["image"]]
     return batch
 
 
-def get_local_dp(config):
+def get_local_dp(config) -> LocalDpMod:
+    """
+    Create and return a Local Differential Privacy (DP) module using the given config.
+
+    Args:
+        config: Configuration object containing DP parameters like clipping_norm, sensitivity, epsilon, and delta.
+
+    Returns:
+        LocalDpMod: A local DP module for applying differential privacy during training.
+    """
     return LocalDpMod(
         config.clipping_norm,
         config.sensitivity,
@@ -28,32 +49,68 @@ def get_local_dp(config):
     )
 
 
-# borrowed from Pytorch quickstart example
-def train(net, trainloader, optim, epochs, device: str):
-    """Train the network on the training set."""
+# Borrowed from Pytorch quickstart example
+def train(net: nn.Module, trainloader: DataLoader, optim: Optimizer, epochs: int, device: str):
+    """
+    Train the neural network on the training dataset.
+
+    Args:
+        net (nn.Module): The neural network model to train.
+        trainloader (DataLoader): DataLoader providing batches of training data.
+        optim (Optimizer): Optimizer used to update model weights.
+        epochs (int): Number of training epochs.
+        device (str): Device to perform training on ('cuda' or 'cpu').
+    """
     criterion = nn.CrossEntropyLoss()
     net.train()
-    for _ in range(epochs):
+
+    for epoch in range(epochs):
         for batch in trainloader:
+            # Move data to device
             images, labels = batch["image"].to(device), batch["label"].to(device)
+
+            # Zero the parameter gradients
             optim.zero_grad()
-            loss = criterion(net(images), labels)
+
+            # Forward pass
+            outputs = net(images)
+            loss = criterion(outputs, labels)
+
+            # Backward pass and optimization
             loss.backward()
             optim.step()
 
 
-# borrowed from Pytorch quickstart example
-def test(net, testloader, device: str):
-    """Validate the network on the entire test set."""
-    criterion = torch.nn.CrossEntropyLoss()
-    correct, loss = 0, 0.0
-    net.eval()
+# Borrowed from Pytorch quickstart example
+def test(net: nn.Module, testloader: DataLoader, device: str) -> Tuple[float, float]:
+    """
+    Evaluate the neural network on the test dataset.
+
+    Args:
+        net (nn.Module): The neural network model to evaluate.
+        testloader (DataLoader): DataLoader providing batches of test data.
+        device (str): Device to perform testing on ('cuda' or 'cpu').
+
+    Returns:
+        Tuple[float, float]: Tuple containing the test loss and accuracy.
+    """
+    criterion = nn.CrossEntropyLoss()
+    correct, total_loss = 0, 0.0
+    net.eval()  # Set model to evaluation mode
+
     with torch.no_grad():
-        for data in testloader:
-            images, labels = data["image"].to(device), data["label"].to(device)
+        for batch in testloader:
+            # Move data to device
+            images, labels = batch["image"].to(device), batch["label"].to(device)
+
+            # Forward pass
             outputs = net(images)
-            loss += criterion(outputs, labels).item()
-            _, predicted = torch.max(outputs.data, 1)
+            total_loss += criterion(outputs, labels).item()
+
+            # Predictions
+            _, predicted = torch.max(outputs, 1)
             correct += (predicted == labels).sum().item()
+
+    # Calculate accuracy
     accuracy = correct / len(testloader.dataset)
-    return loss, accuracy
+    return total_loss, accuracy
