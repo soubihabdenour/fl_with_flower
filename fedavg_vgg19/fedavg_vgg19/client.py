@@ -9,7 +9,7 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchvision import models
 
-from fedavg_vgg16.utils import train, test, apply_transforms
+from fedavg_vgg19.utils import train, test, apply_transforms
 from torchvision.models import VGG16_Weights, VGG19_Weights
 
 
@@ -19,7 +19,8 @@ class FlowerClient(fl.client.NumPyClient):
     def __init__(self, trainset, valset, num_classes):
         self.trainset = trainset
         self.valset = valset
-        self.model = models.vgg16(weights=VGG16_Weights.DEFAULT)
+
+        self.model = models.vgg19(weights=VGG19_Weights.DEFAULT)
         #self.model.classifier[1] = nn.Linear(self.model.last_channel, num_classes)
         # Replace the last fully connected layer
         # VGG16's final classifier layer is at index 6

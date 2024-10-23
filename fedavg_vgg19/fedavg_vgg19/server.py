@@ -12,7 +12,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import models
 
-from fedavg_vgg16.utils import test, apply_transforms
+from fedavg_vgg19.utils import test, apply_transforms
 from torchvision.models import VGG16_Weights, VGG19_Weights
 
 
@@ -45,7 +45,7 @@ def get_evaluate_fn(centralized_testset: Dataset, num_classes: int):
         """Use the test set for evaluation."""
 
         # Determine device
-        model = models.vgg16(weights=VGG16_Weights.DEFAULT)
+        model = models.vgg19(weights=VGG19_Weights.DEFAULT)
         #model.classifier[1] = nn.Linear(model.last_channel, num_classes)
         in_features = model.classifier[6].in_features
         model.classifier[6] = nn.Linear(in_features, num_classes)

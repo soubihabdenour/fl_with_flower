@@ -31,35 +31,35 @@ run_experiment() {
 }
 
 
-## Run experiments for pathmnist with PathologicalPartitioner
-#run_experiment "pathmnist" "PathologicalPartitioner" "num_classes_per_partition" 7 9
-#run_experiment "pathmnist" "PathologicalPartitioner" "num_classes_per_partition" 4 9
-#run_experiment "pathmnist" "PathologicalPartitioner" "num_classes_per_partition" 2 9
+# Run experiments for pathmnist with PathologicalPartitioner
+run_experiment "pathmnist" "PathologicalPartitioner" "num_classes_per_partition" 7 9
+run_experiment "pathmnist" "PathologicalPartitioner" "num_classes_per_partition" 4 9
+run_experiment "pathmnist" "PathologicalPartitioner" "num_classes_per_partition" 2 9
 
-## Run experiments for pathmnist with DirichletPartitioner
-#run_experiment "pathmnist" "DirichletPartitioner" "alpha" 0.9 9
+# Run experiments for pathmnist with DirichletPartitioner
+run_experiment "pathmnist" "DirichletPartitioner" "alpha" 0.9 9
 run_experiment "pathmnist" "DirichletPartitioner" "alpha" 0.3 9
-#run_experiment "pathmnist" "DirichletPartitioner" "alpha" 0.1 9
-#
-## Run experiments for tissuemnist with PathologicalPartitioner
-#run_experiment "tissuemnist" "PathologicalPartitioner" "num_classes_per_partition" 7 8
-#run_experiment "tissuemnist" "PathologicalPartitioner" "num_classes_per_partition" 4 8
-#run_experiment "tissuemnist" "PathologicalPartitioner" "num_classes_per_partition" 2 8
-#
-## Run experiments for tissuemnist with DirichletPartitioner
-#run_experiment "tissuemnist" "DirichletPartitioner" "alpha" 0.9 8
-#run_experiment "tissuemnist" "DirichletPartitioner" "alpha" 0.3 8
-#run_experiment "tissuemnist" "DirichletPartitioner" "alpha" 0.1 8
+run_experiment "pathmnist" "DirichletPartitioner" "alpha" 0.1 9
 
-## Run experiments for bloodmnist with PathologicalPartitioner
-#run_experiment "bloodmnist" "PathologicalPartitioner" "num_classes_per_partition" 2 8
-#run_experiment "bloodmnist" "PathologicalPartitioner" "num_classes_per_partition" 4 8
-#run_experiment "bloodmnist" "PathologicalPartitioner" "num_classes_per_partition" 7 8
-#
-## Run experiments for bloodmnist with DirichletPartitioner
-#run_experiment "bloodmnist" "DirichletPartitioner" "alpha" 0.9 8
-#run_experiment "bloodmnist" "DirichletPartitioner" "alpha" 0.3 8
-#run_experiment "bloodmnist" "DirichletPartitioner" "alpha" 0.1 8
+# Run experiments for tissuemnist with PathologicalPartitioner
+run_experiment "tissuemnist" "PathologicalPartitioner" "num_classes_per_partition" 7 8
+run_experiment "tissuemnist" "PathologicalPartitioner" "num_classes_per_partition" 4 8
+run_experiment "tissuemnist" "PathologicalPartitioner" "num_classes_per_partition" 2 8
+
+# Run experiments for tissuemnist with DirichletPartitioner
+run_experiment "tissuemnist" "DirichletPartitioner" "alpha" 0.9 8
+run_experiment "tissuemnist" "DirichletPartitioner" "alpha" 0.3 8
+run_experiment "tissuemnist" "DirichletPartitioner" "alpha" 0.1 8
+
+# Run experiments for bloodmnist with PathologicalPartitioner
+run_experiment "bloodmnist" "PathologicalPartitioner" "num_classes_per_partition" 2 8
+run_experiment "bloodmnist" "PathologicalPartitioner" "num_classes_per_partition" 4 8
+run_experiment "bloodmnist" "PathologicalPartitioner" "num_classes_per_partition" 7 8
+
+# Run experiments for bloodmnist with DirichletPartitioner
+run_experiment "bloodmnist" "DirichletPartitioner" "alpha" 0.9 8
+run_experiment "bloodmnist" "DirichletPartitioner" "alpha" 0.3 8
+run_experiment "bloodmnist" "DirichletPartitioner" "alpha" 0.1 8
 
 # Final report
 echo "Experiments completed!"
