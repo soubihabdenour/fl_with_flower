@@ -1,0 +1,796 @@
+[2024-10-22 15:05:31,489][flwr][INFO] - Starting Flower simulation, config: num_rounds=100, no round_timeout
+[2024-10-22 15:05:34,617][flwr][INFO] - Flower VCE: Ray initialized with resources: {'memory': 166910887732.0, 'node:115.145.172.224': 1.0, 'object_store_memory': 75818951884.0, 'CPU': 256.0, 'GPU': 5.0, 'accelerator_type:G': 1.0, 'node:__internal_head__': 1.0}
+[2024-10-22 15:05:34,617][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-10-22 15:05:34,617][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 16, 'num_gpus': 0.25}
+[2024-10-22 15:05:34,633][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 16 actors
+[2024-10-22 15:05:34,634][flwr][INFO] - [INIT]
+[2024-10-22 15:05:34,634][flwr][INFO] - Requesting initial parameters from one random client
+[2024-10-22 15:05:41,285][flwr][INFO] - Received initial parameters from one random client
+[2024-10-22 15:05:41,285][flwr][INFO] - Evaluating initial global parameters
+[2024-10-22 15:06:01,860][flwr][INFO] - initial parameters (loss, other metrics): 484.9854905605316, {'accuracy': 0.12604456824512536}
+[2024-10-22 15:06:01,862][flwr][INFO] - 
+[2024-10-22 15:06:01,862][flwr][INFO] - [ROUND 1]
+[2024-10-22 15:06:01,862][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-10-22 15:06:07,319][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+[2024-10-22 15:06:07,319][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[2024-10-22 15:06:07,876][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2024-10-22 15:06:07,877][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+[2024-10-22 15:06:08,200][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2024-10-22 15:06:08,200][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+[2024-10-22 15:06:17,519][flwr][INFO] - aggregate_fit: received 2 results and 3 failures
+[2024-10-22 15:06:18,090][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-10-22 15:06:36,327][flwr][INFO] - fit progress: (1, 448.57724916934967, {'accuracy': 0.33328690807799444}, 34.4647917682305)
+[2024-10-22 15:06:36,327][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-10-22 15:06:39,840][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-10-22 15:06:39,841][flwr][INFO] - 
+[2024-10-22 15:06:39,841][flwr][INFO] - [ROUND 2]
+[2024-10-22 15:06:39,841][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-10-22 15:06:42,660][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2024-10-22 15:06:42,660][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+[2024-10-22 15:06:42,823][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2024-10-22 15:06:42,824][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+[2024-10-22 15:06:43,531][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+[2024-10-22 15:06:43,531][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[2024-10-22 15:07:20,704][flwr][INFO] - aggregate_fit: received 2 results and 3 failures
+[2024-10-22 15:07:40,293][flwr][INFO] - fit progress: (2, 453.19818913936615, {'accuracy': 0.3661559888579387}, 98.43075389787555)
+[2024-10-22 15:07:40,293][flwr][INFO] - configure_evaluate: strategy sampled 2 clients (out of 50)
+[2024-10-22 15:07:43,330][flwr][INFO] - aggregate_evaluate: received 2 results and 0 failures
+[2024-10-22 15:07:43,330][flwr][INFO] - 
+[2024-10-22 15:07:43,331][flwr][INFO] - [ROUND 3]
+[2024-10-22 15:07:43,331][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 50)
+[2024-10-22 15:07:46,016][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+[2024-10-22 15:07:46,016][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408153, ip=115.145.172.224, actor_id=5c63a2d019657acae54f127901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f9d58389ab0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 24.75 MiB is free. Process 3408154 has 10.09 GiB memory in use. Including non-PyTorch memory, this process has 648.00 MiB memory in use. Of the allocated memory 468.40 MiB is allocated by PyTorch, and 25.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[2024-10-22 15:07:46,352][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2024-10-22 15:07:46,352][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408152, ip=115.145.172.224, actor_id=422bc47aeaa6c139acbce27701000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ff4241999f0>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+[2024-10-22 15:07:46,742][flwr][ERROR] - Traceback (most recent call last):
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2024-10-22 15:07:46,743][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 133, in client_fn
+    return FlowerClient(trainset, valset, num_classes, config_fit, client_dataset_ratio, context.node_config).to_client()
+  File "/home/abdenour/fl_with_flower/fednova_vgg16/fednova_vgg16/client.py", line 40, in __init__
+    self.model = self.model.to(self.device)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1174, in to
+    return self._apply(convert)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 780, in _apply
+    module._apply(fn)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 805, in _apply
+    param_applied = fn(param)
+  File "/home/abdenour/anaconda3/envs/fl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1160, in convert
+    return t.to(
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3408151, ip=115.145.172.224, actor_id=62c4097fbbf4c1eba4d9304b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f3a2c549a80>)
+  File "/home/abdenour/.local/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
