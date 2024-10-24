@@ -12,7 +12,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import models
 
-from fedavg_vgg16.utils import test, apply_transforms
+from fedavg_vgg11.utils import test, apply_transforms
 from torchvision.models import VGG16_Weights, VGG19_Weights, VGG11_Weights
 
 
